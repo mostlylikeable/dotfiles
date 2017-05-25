@@ -14,7 +14,7 @@ else
   DOTFILES_DIR=$DOTFILES_DIR_OVERRIDE
 fi
 
-source $DOTFILES_DIR/init.sh
+source $DOTFILES_DIR/sh/init.sh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

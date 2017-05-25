@@ -1,18 +1,18 @@
 
-source $HOME/dotfiles/sh/env.sh
-source $HOME/dotfiles/sh/functions.sh
+source $DOTFILES_DIR/sh/env.sh
+source $DOTFILES_DIR/sh/functions.sh
 
-source $HOME/dotfiles/sh/osx.sh
+source $DOTFILES_DIR/sh/osx.sh
 
 #source $HOME/dotfiles/sh/st_env.sh
 #source $HOME/dotfiles/sh/st_secret.sh
 
-# set custom dir if not set
-if [ -z "${DOTFILES_CUSTOM_DIR}" ]; then
-  DOTFILES_DIR="$HOME/.dotfiles-custom"
-fi
+[[ -z "${DOTFILES_CUSTOM_DIR}" ]] && custom_dir="${HOME}/.dotfiles-custom" || custom_dir="${DOTFILES_CUSTOM_DIR}"
 
-if [ -n "${DOTFILES_CUSTOM_DIR}" ]; then
-  echo "loading custom dotfiles from ${DOTFILES_CUSTOM_DIR}"
-  for f in $DOTFILES_CUSTOM_DIR/*.sh; do source $f; done
+if [ -n "${custom_dir}" ]; then
+  echo "sourcing ${custom_dir}"
+  for f in $custom_dir/*.sh; do
+    echo "source ${f}"
+    source $f
+  done
 fi
