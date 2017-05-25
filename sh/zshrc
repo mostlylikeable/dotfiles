@@ -7,13 +7,14 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="muse"
 
-source $HOME/dotfiles/sh/env.sh
-source $HOME/dotfiles/sh/functions.sh
+# init dotfiles
+if [ -z "${DOTFILES_DIR_OVERRIDE}" ]; then
+  DOTFILES_DIR="$HOME/.dotfiles"
+else
+  DOTFILES_DIR=$DOTFILES_DIR_OVERRIDE
+fi
 
-source $HOME/dotfiles/sh/osx.sh
-
-source $HOME/dotfiles/sh/st_env.sh
-source $HOME/dotfiles/sh/st_secret.sh
+source $DOTFILES_DIR/init.sh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

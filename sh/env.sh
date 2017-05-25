@@ -8,8 +8,6 @@ export EDITOR=vim
 # use english + utf-8
 export LC_ALL="en_US.UTF-8"
 
-# local-auth: 57ed4cdf-9aee-4c84-841f-5e1e07de5bfa
-
 # groovy/grails
 export GVM_HOME=$HOME/.gvm
 export GRAILS_HOME=$GVM_HOME/grails/current
