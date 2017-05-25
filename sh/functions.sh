@@ -119,6 +119,10 @@ function idea() {
   fi
 }
 
+function who_port {
+  lsof -iTCP:$1 -sTCP:LISTEN
+}
+
 # override rm to send to trash (timestamped) instead
 function rm () {
     local path
