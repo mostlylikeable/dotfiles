@@ -1,3 +1,4 @@
+#!/bin/bash
 
 export DEBUG_DOTFILES=true
 

@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # default shell
 export SHELL=/bin/zsh
@@ -15,6 +16,8 @@ export GROOVY_HOME=$GVM_HOME/groovy/current
 
 # java
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+export PATH=$PATH:$HOME/bin
 
 # bash completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then

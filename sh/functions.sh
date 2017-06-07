@@ -1,3 +1,6 @@
+#!/bin/bash
+
+alias gundo='git reset --soft HEAD~1'
 
 # set java home to java 8 jvm
 function j8() {
@@ -74,12 +77,12 @@ function pids() {
   ps aux | grep "[${1:0:1}]${1:1}" | awk '{print $2}'
 }
 
-function who_port {
+function wport() {
   lsof -iTCP:$1 -sTCP:LISTEN
 }
 
 # override rm to send to trash (timestamped) instead
-function rm () {
+function rm() {
     local path
     for path in "$@"; do
         # ignore any arguments

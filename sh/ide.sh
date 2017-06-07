@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 # open project dir in intellij
 # note: must have .idea dir already
@@ -45,4 +45,7 @@ function idea() {
 
      popd > /dev/null
   fi
+
+  # for some reason we end up in $HOME after above is run
+  cd $wd
 }
