@@ -1,0 +1,24 @@
+"*":
+  "atom-material-ui":
+    colors:
+      abaseColor: "#607d8b"
+      predefinedColor: "Blue Grey"
+    fonts:
+      fontSize: 14
+    tabs:
+      compactTabs: true
+      stretchedTabs: true
+    ui:
+      panelContrast: true
+      panelShadows: true
+  core:
+    themes: [
+      "atom-material-ui"
+      "atom-material-syntax"
+    ]
+  editor:
+    defaultFontSize: 12
+    fontSize: 8
+    scrollPastEnd: true
+  "exception-reporting":
+    userId: "44bd1b9b-b612-4b7b-b8b0-ead41ea28372"

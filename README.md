@@ -1,5 +1,11 @@
 # dotfile randomness
 
+## env setup
+* install bash 4
+  - `brew update && brew install bash`
+  - `brew install bash # bash v5`
+  - `ln -s $<PROJECT_DIR>/dotfiles/config/atom $HOME/.atom`
+
 ## setup
 * symlink to dotfiles
   - `ln -s $<PROJECT_DIR>/dotfiles $HOME/.dotfiles`

@@ -1,38 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# func.sh
 
-alias gundo='git reset --soft HEAD~1'
-
-# set java home to java 8 jvm
-function j8() {
-  # outputs error if no java 8 jvm installed
-  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-  java -version
-}
-
-# set java home to java 7 jvm
-function j7() {
-  # outputs error if no java 7 jvm installed
-  export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
-  java -version
-}
-
-function jver() {
-  version=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}')
-  echo $version
+function status() {
+  echo "\033[1m> ${1}\033[0m"
 }
 
 function uuid() {
-  uuidgen|tr '[:upper:]' '[:lower:]'
-}
-
-# exec gradle wrapper in current or parents
-function gradle() {
-  gw="$(upfind gradlew)"
-  if [ -z "$gw" ]; then
-    echo "Gradle wrapper not found."
-  else
-    $gw $@
-  fi
+  uuidgen | tr '[:upper:]' '[:lower:]' | tr -d '\n' | pbcopy
+  pbpaste
 }
 
 # find $1 in current dir, or parents
@@ -48,6 +23,7 @@ function upfind() {
   done
 }
 
+# mkdir -> cd
 function mcd() {
   mkdir -p "$1" && cd "$1"
 }
@@ -91,9 +67,13 @@ function rm() {
             local dst=${path##*/}
             # append the time if necessary
             while [ -e ~/.Trash/"$dst" ]; do
-                dst="$dst "$(date +%H-%M-%S)
+                dst="$dst $(/bin/date +%H-%M-%S)"
             done
             /bin/mv "$path" ~/.Trash/"$dst"
         fi
     done
+}
+
+function post() {
+  curl -i -X POST -H "Content-Type: application/json" -d $1 $2
 }

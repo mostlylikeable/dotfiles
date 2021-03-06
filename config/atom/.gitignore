@@ -1,0 +1,8 @@
+.apm
+.node-gyp
+blob-store
+compile-cache
+recovery
+storage
+.atom*
+packages
