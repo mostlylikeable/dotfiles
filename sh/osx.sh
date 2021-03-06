@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# osx.sh
 
 alias bg_ocean_blue="set_bg \"#1B57FF\""
 alias bg_light_salmon4="set_bg \"#8b5742\""

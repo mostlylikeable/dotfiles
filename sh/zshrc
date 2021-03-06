@@ -61,3 +61,7 @@ source $DOTFILES_DIR/sh/init.sh
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/Z0040SY/.sdkman"
+[[ -s "/Users/Z0040SY/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/Z0040SY/.sdkman/bin/sdkman-init.sh"

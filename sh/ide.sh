@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# ide.sh
 
 # open project dir in intellij
 # note: must have .idea dir already
