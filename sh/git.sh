@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # git.sh
 
-init-git-aliases
-
 function init-git-aliases() {
   git config --global alias.co checkout
   git config --global alias.cl clone
@@ -27,29 +25,6 @@ function init-git-aliases() {
   git config --global alias.undo 'reset --soft HEAD~${1:1}'
 
   git config --global alias.cu 'checkout -b $1 upstream/$1'
-
-  # pull from upstream/origin
-  git config --global alias.ptap pull upstream/tap-configs
-  git config --global alias.pu '!f() \
-{ \
-  local up="${1:-upstream}"; \
-  local br="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"; \
-  local root="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"; \
-  if [ $br = "tap-configs" ]; then
-    root=$br
-  fi
-  echo "pull $up $root"; \
-  [ "$br" != "$root" ] && echo "ERROR: must be on $root" || git pull "$up" "$br"; \
-}; f'
-
-  # delete current branch; switch to root branch
-  git config --global alias.brd '!f() \
-{ \
-  local br="$(git symbolic-ref --short -q HEAD 2>/dev/null)"; \
-  local root="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"; \
-  echo "deleting br $br with root $root"; \
-  git checkout ${root}; git branch -D ${br};
-}; f'
 }
 
 function local_branch_exists() {
@@ -81,3 +56,5 @@ function tag_exists() {
     return 1
   fi
 }
+
+init-git-aliases
