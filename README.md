@@ -1,17 +1,56 @@
 # dotfile randomness
 
-## env setup
-* install bash 4
-  - `brew update && brew install bash`
-  - `brew install bash # bash v5`
-  - `ln -s $<PROJECT_DIR>/dotfiles/config/atom $HOME/.atom`
+## _**prerequisites**_
 
-## setup
-* symlink to dotfiles
-  - `ln -s $<PROJECT_DIR>/dotfiles $HOME/.dotfiles`
-* configure custom .sh file dir, if you need one
-  - set env variable `DOTFILES_CUSTOM_DIR`
-  - *all .sh files in this dir will be sourced*
-* symlink to zshrc (or copy init lines from zshrc to yours)
-  - `ln -s $<PROJECT_DIR>/dotfiles/sh/zshrc $HOME/.zshrc`
-* _NOTE: you can override `$HOME/.dotfiles` dirname with env var `DOTFILES_DIR_OVERRIDE`_
+```bash
+# make dev/project dir
+mkdir $HOME/dev
+
+# install homebrew
+sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash
+brew update
+
+# install bash 5
+brew install bash
+sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells'
+
+# install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# change default shell to zsh (already is in osx)
+chsh -s $(which zsh)
+
+# install sdkman
+curl -s "https://get.sdkman.io" | bash
+```
+
+## _**setup**_
+
+```bash
+# clone repo
+git clone git@github.com:mostlylikeable/dotfiles.git
+
+# symlink dotfiles
+ln -s $HOME/dev/dotfiles $HOME/.dotfiles
+
+# set custom dotfiles dir var
+export DOTFILES_CUSTOM_DIR=<custom_dotfiles_dir>
+
+# replace .zshrc with symlink to this one
+rm $HOME/.zshrc
+ln -s $HOME/dev/dotfiles/sh/zshrc $HOME/.zshrc
+
+# NOTE: $HOME/.dotfiles dir can be overridden via
+# -- OPTIONAL --
+export DOTFILES_DIR_OVERRIDE=<dotfiles_dir>
+```
+
+## _**testing**_
+
+```bash
+# install bats https://bats-core.readthedocs.io/en/stable/index.html
+brew install bats-core
+
+# run tests
+bats test
+```
