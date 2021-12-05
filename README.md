@@ -1,5 +1,12 @@
 # dotfile randomness
 
+## _**app suggestions_**
+- Atom
+  - install package _Sync-Settings_.
+  - install package _Sync-Settings-folder-location_.
+- VSCode
+- IDEA
+
 ## _**prerequisites**_
 
 ```bash
@@ -22,6 +29,10 @@ chsh -s $(which zsh)
 
 # install sdkman
 curl -s "https://get.sdkman.io" | bash
+
+# install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
 ```
 
 ## _**setup**_
@@ -31,7 +42,7 @@ curl -s "https://get.sdkman.io" | bash
 git clone git@github.com:mostlylikeable/dotfiles.git
 
 # symlink dotfiles
-ln -s $HOME/dev/dotfiles $HOME/.dotfiles
+ln -s $HOME/<PATH_TO_DOTFILES_REPO>/ $HOME/.dotfiles
 
 # set custom dotfiles dir var
 export DOTFILES_CUSTOM_DIR=<custom_dotfiles_dir>

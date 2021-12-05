@@ -3,6 +3,7 @@
 
 export DEBUG_DOTFILES=false
 
+echo "sourcing dotfiles from $DOTFILES_DIR"
 source $DOTFILES_DIR/sh/io.sh
 
 function _df_log_debug {

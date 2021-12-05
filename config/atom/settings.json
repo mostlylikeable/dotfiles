@@ -1,0 +1,20 @@
+{
+	"*": {
+		"core": {
+			"telemetryConsent": "no"
+		},
+		"editor": {
+			"defaultFontSize": 10,
+			"fontSize": 8
+		},
+		"exception-reporting": {
+			"userId": "9ee02ad8-6b1f-4ba9-82ae-1d2891568242"
+		},
+		"sync-settings-folder-location": {
+			"folderPath": "/Users/ben/dev/me/dotfiles/config/atom"
+		},
+		"sync-settings": {
+			"useOtherLocation": true
+		}
+	}
+}

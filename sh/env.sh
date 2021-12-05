@@ -28,6 +28,6 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 # sdkman
-if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-fi
+# if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+#   source "$HOME/.sdkman/bin/sdkman-init.sh"
+# fi
