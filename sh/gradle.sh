@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 # dev.sh
 
-alias narc='gradle codenarcMain codenarcTest'
+alias narc='gw codenarcMain codenarcTest'
 
 # exec gradle wrapper in current or parents
-function gradle {
+function gw {
   local gw="$(upfind gradlew)"
   if [ -z "$gw" ]; then
     echo "Gradle wrapper not found."
+    gradle $@
   else
     $gw $@
   fi
