@@ -2,8 +2,6 @@
 
 ## _**apps**_
 - Atom
-  - install package _Sync-Settings_.
-  - install package _Sync-Settings-folder-location_.
 - VSCode
 - IDEA
 
