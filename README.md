@@ -1,6 +1,6 @@
 # dotfile randomness
 
-## _**app suggestions_**
+## _**apps**_
 - Atom
   - install package _Sync-Settings_.
   - install package _Sync-Settings-folder-location_.
