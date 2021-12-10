@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 load ./test_utils.bash
-load ./sh/io.sh
+load ./sh/fs.sh
 
 @test "dexists: false if no dir" {
   ! dexists /not_found

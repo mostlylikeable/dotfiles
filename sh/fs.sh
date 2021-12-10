@@ -1,10 +1,28 @@
 #!/usr/bin/env bash
-# io.sh
+# fs.sh
 
+# tests whether a dir exists or not
+#   -> true if dir exists
+#
+# usage:
+# if dexists $1; then
+#   echo "$1 dir exists"
+# else
+#   echo "$1 dir does not exist"
+# fi
 function dexists {
   [[ -d $1 ]] && true || false
 }
 
+# tests whether a dir is empty or not.
+#   -> true if dir is empty or does not exist.
+#
+# usage:
+# if dempty $1; then
+#   echo "$1 dir is empty"
+# else
+#   echo "$1 dir is not empty"
+# fi
 function dempty {
   if ! dexists $1; then
     echo "$1 dir not found" >&2

@@ -4,7 +4,7 @@
 export DEBUG_DOTFILES=false
 
 # echo "sourcing dotfiles from $DOTFILES_DIR"
-source $DOTFILES_DIR/sh/io.sh
+source $DOTFILES_DIR/sh/fs.sh
 
 function _df_log_debug {
   if [ "$DEBUG_DOTFILES" = true ]; then

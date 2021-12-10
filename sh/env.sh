@@ -12,6 +12,7 @@ export DEV_DIR
 alias dev='cd $DEV_DIR'
 
 # make dev repos cd'able from anywhere
+# will add all repos nested to $DEV_DIR, to cd path
 if [[ "$(ls -A $DEV_DIR)" ]]; then
   export CDPATH=$DEV_DIR$(ls -dm $DEV_DIR/*/ | tr -d ' ' | tr ',' ':'):$CDPATH
 fi
