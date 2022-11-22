@@ -1,1 +1,8 @@
+# Global .gitignore
+
+# osx finder view config
 .DS_Store
+
+# For code hoarders like me, to toss random code into a dir to feel better :)
+.old/
+.ignored/

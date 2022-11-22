@@ -70,19 +70,11 @@ ZSH_THEME="muse"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-# init dotfiles
-# export DOTFILES_DIR_OVERRIDE=$HOME/dev
-if [ -z "${DOTFILES_DIR_OVERRIDE}" ]; then
-  DOTFILES_DIR="$HOME/.dotfiles"
-else
-  DOTFILES_DIR=$DOTFILES_DIR_OVERRIDE
-fi
-
-source $DOTFILES_DIR/sh/init.sh
+# plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+
+source ~/.zsh_profile
 
 # User configuration
 
