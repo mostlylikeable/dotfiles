@@ -1,0 +1,153 @@
+# Global .gitconfig
+[alias]
+  # List aliases, sorted
+  aliases = "!a() { git config --get-regexp alias | sort; }; a"
+
+  # Print user email from config
+  whoami = config user.email
+
+  # Clone + submodules
+  cl = clone --recursive
+
+  # Verbose list tags
+  tags = tag -l
+
+  # Verbose list branches
+  br = branch --all
+
+  # Delete a branch if merged
+  brd = branch -d
+
+  # Forece delete a branch
+  brD = branch -D
+
+  # Switch branch
+  sw = switch
+
+  # checkout alias
+  co = checkout
+
+  # Create a branch
+  cob = checkout -b
+
+  # Save a stash
+  ss = stash save
+
+  # List stashes
+  sl = stash list
+
+  # Pop a stash
+  sp = stash pop
+
+  # Apply a stash
+  sa = stash apply
+
+  # Verbose list remotes
+  remotes = remote -v
+
+  # Abbreviated sha, desc, graph last 20
+  ls = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+  # Abbreviated sha, desc, graph last 20 all branches
+  lsa = log --pretty=oneline -n 20 --graph --abbrev-commit --all
+
+  # Log last commit
+  last = log -1 HEAD --stat
+
+  # Short format status
+  stat = status -s
+
+  # Diff between latest and current
+  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+  df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # Pull remote + submodules
+  p = pull --recurse-submodules
+
+  # Pull origin + submodules
+  po = pull origin --recurse-submodules
+
+  # Push alias
+  pu = push
+
+  # Force push alias
+  fp = push --force-with-lease
+
+  # Commit verbose
+  cm = commit -v
+
+  # Amend staged to last commit
+  cma = commit -v --amend --reuse-message=HEAD
+
+  # (squash) interactive rebase last N commits
+  sq = "!s() { git rebase -i HEAD~$1; }; s"
+
+  # Undo last N (default 1) commits
+  undo = "!u() { git reset --soft HEAD~${1-1}; }; u"
+
+  # Rebase alias
+  rb = rebase
+
+  # Delete branches merged to main
+  prune-branches = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+  # Revert to pristine
+  nuke = reset --hard
+
+  # Rollback a file
+  rollback = checkout --
+
+  # Unstage changes to a file
+  unstage = reset HEAD --
+
+[apply]
+	# Fix whitespace errors on patch
+	whitespace = fix
+
+[branch]
+	# List most recent branches first
+	sort = -committerdate
+
+[core]
+  # Global .gitignore
+  excludesfile = ~/.gitignore
+
+  # Globacl .gitattributes
+  attributesfile = ~/.gitattributes
+
+  # Make git rebase after for osx
+  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+  # https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+  trustctime = false
+
+  # Prevent showing files with names containing non-ascii as untracked on osx
+  # https://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+  precomposeunicode = true
+
+  # Speed up commands that involve determining untracked files such as git status
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
+
+[diff]
+	# Detect copies in diff
+	renames = copies
+
+[diff "bin"]
+	# Use `hexdump` to diff binary files
+  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+	textconv = hexdump -v -C
+
+[merge]
+	# Include summaries in merge commits
+	log = true
+
+[init]
+	defaultBranch = main
+
+[help]
+	# Auto correct mistyped commands (delays before running correction)
+	autocorrect = 1
+
+[user]
+	name = mostlylikeable
+  email = mostlylikeble@gmail.com
