@@ -22,6 +22,12 @@
   brD = branch -D
 
   # Switch branch
+  #
+  # switch to branch
+  # g sw -c some-remote-branch
+  #
+  # switch back?
+  # g sw -
   sw = switch
 
   # checkout alias
@@ -44,6 +50,9 @@
 
   # Verbose list remotes
   remotes = remote -v
+
+  # Alias for adding upstream remote
+  remoteup = remote add upstream
 
   # Abbreviated sha, desc, graph last 20
   ls = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -145,8 +154,8 @@
 	defaultBranch = main
 
 [help]
-	# Auto correct mistyped commands (delays before running correction)
-	autocorrect = 1
+	# Auto correct mistyped commands (delays 3s before running correction)
+	autocorrect = 30
 
 [user]
   name = mostlylikeable
