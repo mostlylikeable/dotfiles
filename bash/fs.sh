@@ -66,11 +66,9 @@ fs::mkdir_enter() {
 #
 # @params
 #   dir - the directory
-# @output
-#   true if directory exists
 ###############################################################################
 fs::dir_exists() {
-  [[ -d $1 ]] && true
+  [[ -d $1 ]]
 }
 
 ###############################################################################
@@ -78,15 +76,9 @@ fs::dir_exists() {
 #
 # @params
 #   dir - the directory
-# @output
-#   true if directory exists and is empty
 ###############################################################################
 fs::is_dir_empty() {
-  if ! dir_exists "$1"; then
-    print::error "$1 does not exist" && false
-  else
-    [[ ! "$(ls -A "$1")" ]] && true
-  fi;
+  fs::dir_exists "$1" && [[ ! "$(ls -A "$1")" ]]
 }
 
 ###############################################################################
