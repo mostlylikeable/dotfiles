@@ -7,3 +7,7 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+# don't add newlines to symlinks
+[bin/*]
+insert_final_newline = false
