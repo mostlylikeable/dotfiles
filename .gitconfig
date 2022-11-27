@@ -119,12 +119,12 @@
   unstage = reset HEAD --
 
 [apply]
-	# Fix whitespace errors on patch
-	whitespace = fix
+  # Fix whitespace errors on patch
+  whitespace = fix
 
 [branch]
-	# List most recent branches first
-	sort = -committerdate
+  # List most recent branches first
+  sort = -committerdate
 
 [core]
   # Global .gitignore
@@ -143,28 +143,28 @@
   precomposeunicode = true
 
   # Speed up commands that involve determining untracked files such as git status
-	# https://git-scm.com/docs/git-update-index#_untracked_cache
-	untrackedCache = true
+  # https://git-scm.com/docs/git-update-index#_untracked_cache
+  untrackedCache = true
 
 [diff]
-	# Detect copies in diff
-	renames = copies
+  # Detect copies in diff
+  renames = copies
 
 [diff "bin"]
-	# Use `hexdump` to diff binary files
+  # Use `hexdump` to diff binary files
   # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
-	textconv = hexdump -v -C
+  textconv = hexdump -v -C
 
 [merge]
-	# Include summaries in merge commits
-	log = true
+  # Include summaries in merge commits
+  log = true
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [help]
-	# Auto correct mistyped commands (delays 3s before running correction)
-	autocorrect = 30
+  # Auto correct mistyped commands (delays 3s before running correction)
+  autocorrect = 30
 
 [user]
   name = mostlylikeable
