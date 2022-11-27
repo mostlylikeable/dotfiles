@@ -71,13 +71,22 @@
   df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
   # Pull remote + submodules
-  p = pull --recurse-submodules
+  pl = pull --recurse-submodules
 
   # Pull origin + submodules
-  po = pull origin --recurse-submodules
+  plo = pull origin --recurse-submodules
+
+  # Pull upstream + submodules
+  plo = pull upstream --recurse-submodules
 
   # Push alias
   pu = push
+
+  # Push to origin
+  puo = push origin
+
+  # Push to upstream
+  puu = push upstream
 
   # Force push alias
   fp = push --force-with-lease
