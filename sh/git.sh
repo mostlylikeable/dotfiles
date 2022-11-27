@@ -85,3 +85,16 @@ git::repo_from_url() {
   base="$(basename "$1")"
   echo "${base%.*}"
 }
+###############################################################################
+# Get the current branch name
+###############################################################################
+git::current_branch() {
+  local ref
+  ref=$(git::cmd symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(git::cmd rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo "${ref#refs/heads/}"
+}
