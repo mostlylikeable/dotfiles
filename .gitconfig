@@ -70,26 +70,36 @@
   # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
   df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-  # Pull remote + submodules
-  pl = pull --recurse-submodules
+  # Pull origin main
+  pom = pull origin main --recuse-submodules
 
-  # Pull origin + submodules
-  plo = pull origin --recurse-submodules
+  # Pull upstream main
+  pum = pull upstream main --recurse-submodules
 
-  # Pull upstream + submodules
-  plo = pull upstream --recurse-submodules
+  # Get current branch name
+  currentbr = "!f() { \
+    local ref; \
+    ref=$(git symbolic-ref --quiet HEAD 2> /dev/null); \
+    local ret=$?; \
+    if [[ $ret != 0 ]]; \
+    then \
+      [[ $ret == 128 ]] && return; \
+      ref=$(git rev-parse --short HEAD 2> /dev/null) || return; \
+    fi; \
+    echo ${ref#refs/heads/}; \
+  }; f"
 
-  # Push alias
-  pu = push
+  # Push current branch to origin
+  pusho = !"git push origin $(git currentbr)"
 
-  # Push to origin
-  puo = push origin
+  # Force push current branch to origin
+  fpusho = !"git push --force-with-lease origin $(git currentbr)"
 
-  # Push to upstream
-  puu = push upstream
+  # Push current branch to upstream
+  pushu = !"git push upstream $(git currentbr)"
 
-  # Force push alias
-  fp = push --force-with-lease
+  # Force push current branch to upstream
+  fpushu = !"git push --force-with-lease upstream $(git currentbr)"
 
   # Commit verbose
   cm = commit -v
@@ -105,6 +115,9 @@
 
   # Rebase alias
   rb = rebase
+
+  # Rebase main onto current
+  rbm = rebase main
 
   # Delete branches merged to main
   prune-branches = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
