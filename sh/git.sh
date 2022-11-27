@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Enable zsh command completion
+autoload -U +X compinit && compinit
+
 # shellcheck disable=SC1091
 source "${DOTFILES_DIR}/sh/fs.sh"
 # shellcheck disable=SC1091
@@ -7,15 +10,17 @@ source "${DOTFILES_DIR}/sh/print.sh"
 
 # Alias git and configure zsh for tab completion
 alias g="git"
+compdef g=git
 
 # Git clone & cd
 alias clone="git::clone_cd"
 
-# Enable tab completion for `g` by marking it as an alias for `git`
-# https://github.com/mathiasbynens/dotfiles/blob/main/.bash_profile
-if type _git &> /dev/null; then
-	complete -o default -o nospace -F _git g;
-fi;
+# Uncomment for bash
+# # Enable tab completion for `g` by marking it as an alias for `git`
+# # https://github.com/mathiasbynens/dotfiles/blob/main/.bash_profile
+# if type _git &> /dev/null; then
+# 	complete -o default -o nospace -F _git g;
+# fi;
 
 # The git prompt's git commands are read-only and should not interfere with
 # other processes. This environment variable is equivalent to running with `git
