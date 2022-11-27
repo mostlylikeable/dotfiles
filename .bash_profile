@@ -51,8 +51,8 @@ utils.sh"
 # Source shell dotfiles
 echo "sourcing dotfiles from $DOTFILES_DIR"
 for file in $FILES; do
-  # echo "  - $DOTFILES_DIR/bash/$file"
-  source $(realpath "$DOTFILES_DIR/bash/$file")
+  # echo "  - $DOTFILES_DIR/sh/$file"
+  source $(realpath "$DOTFILES_DIR/sh/$file")
 done;
 unset file
 unset FILES
