@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "${DOTFILES_DIR}/bash/print.sh"
+source "${DOTFILES_DIR}/sh/print.sh"
 
 # cd up 1
 alias ..="cd .."

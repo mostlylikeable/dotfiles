@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "${DOTFILES_DIR}/bash/fs.sh"
+source "${DOTFILES_DIR}/sh/fs.sh"
 
 # Run gradle command
 alias gr="gradle::run"

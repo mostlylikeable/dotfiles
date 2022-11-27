@@ -10,7 +10,7 @@
 # https://github.com/bertvv/dotfiles/blob/main/.bash.d/colors.sh
 
 # shellcheck disable=SC1091
-source "${DOTFILES_DIR}/bash/print.sh"
+source "${DOTFILES_DIR}/sh/print.sh"
 
 ###############################################################################
 # Tints or colors a string

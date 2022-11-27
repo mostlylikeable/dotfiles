@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "${DOTFILES_DIR}/bash/fs.sh"
-source "${DOTFILES_DIR}/bash/print.sh"
+source "${DOTFILES_DIR}/sh/fs.sh"
+# shellcheck disable=SC1091
+source "${DOTFILES_DIR}/sh/print.sh"
 
+# Alias git and configure zsh for tab completion
 alias g="git"
+
+# Git clone & cd
 alias clone="git::clone_cd"
 
 # Enable tab completion for `g` by marking it as an alias for `git`
