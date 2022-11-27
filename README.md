@@ -24,11 +24,27 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 Optionally install these apps:
 
+- XCode (download from website for less flakiness)
 - [VSCode](https://code.visualstudio.com/docs/setup/mac)
 - [Sublime Text](https://www.sublimetext.com/3)
-- XCode (download from website for less flakiness)
 - Firefox/Chrome
 - [Notion](https://www.notion.so/desktop)
+
+### VSCode Extensions
+
+#### _Common_
+
+- _EditorConfig_
+
+#### _JS/TS_
+
+- _JavaScript and TypeScript_
+- _React Native Tools_
+- _ESLint_
+
+#### _Python_
+
+- _Python_
 
 ## Install
 
