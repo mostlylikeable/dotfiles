@@ -102,10 +102,13 @@ source ~/.zsh_profile
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# Configure sdkman if installed
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Init rbenv if installed
+[[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
+
+# Configure volta if installed
+export VOLTA_HOME="$HOME/.volta"
+[[ -d "$VOLTA_HOME" ]] && export PATH="$VOLTA_HOME/bin:$PATH"
