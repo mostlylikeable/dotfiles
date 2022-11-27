@@ -72,5 +72,21 @@ brew install pv
 # https://mama.indstate.edu/users/ice/tree/
 brew install tree
 
+##################
+# React Native
+##################
+
+# Facebook tool for watching files
+# https://formulae.brew.sh/formula/watchman
+brew install watchman
+
+# CocaaPods (for iOS dev)
+# https://formulae.brew.sh/formula/cocoapods
+brew install cocoapods
+
+# Ruby version manager (for ReactNative)
+# https://formulae.brew.sh/formula/rbenv
+brew install rbenv ruby-build
+
 # Remove outdated versions from the cellar
 brew cleanup
