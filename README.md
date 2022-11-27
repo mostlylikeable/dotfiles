@@ -20,10 +20,20 @@ brew update
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
+### Apps
+
+Optionally install these apps:
+
+- [VSCode](https://code.visualstudio.com/docs/setup/mac)
+- [Sublime Text](https://www.sublimetext.com/3)
+- XCode (download from website for less flakiness)
+- Firefox/Chrome
+- [Notion](https://www.notion.so/desktop)
+
 ## Install
 
-**WARNING**: You'll be prompted but be warned that bootstrapping will overwrite
-various files in `$HOME`, like `.zsh_profile`, `.gitconfig`, etc.
+_**WARNING**: You'll be prompted but be warned that bootstrapping will overwrite
+various files in `$HOME`, like `.zsh_profile`, `.gitconfig`, etc._
 
 ### Custom dotfiles
 
@@ -57,4 +67,22 @@ sudo curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.
 
 # update brew and install various formulas (requires repo to be cloned)
 source ./brew.sh
+```
+
+### Install Ruby
+
+For react-native development, install [the correct version](https://github.com/facebook/react-native/blob/main/template/_ruby-version) of ruby.
+
+```shell
+# rbenv install 2.7.6
+rbenv install <version>
+```
+
+### Install Volta
+
+For Node version management, install [Volta](https://docs.volta.sh).
+
+```shell
+# volta setup is already added to .zshrc
+curl https://get.volta.sh | bash -s -- --skip-setup
 ```
