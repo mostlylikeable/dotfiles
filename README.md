@@ -9,6 +9,7 @@ _Inspired by `dotfiles` by
 I've tried to give credit where appropriate, but definitely check me on that
 if I've missed a spot._
 
+---
 ## Prerequisites
 
 ```shell
@@ -46,6 +47,7 @@ Optionally install these apps:
 
 - _Python_
 
+---
 ## Install
 
 _**WARNING**: You'll be prompted but be warned that bootstrapping will overwrite
