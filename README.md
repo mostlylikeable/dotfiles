@@ -97,11 +97,26 @@ For react-native development, install [the correct version](https://github.com/f
 rbenv install <version>
 ```
 
-### Install Volta
+### Install Node
 
-For Node version management, install [Volta](https://docs.volta.sh).
+For Node version management, install [NVM](https://github.com/nvm-sh/nvm).
 
 ```shell
-# volta setup is already added to .zshrc
-curl https://get.volta.sh | bash -s -- --skip-setup
+# check link for latest version
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+
+# install node
+nvm install 18
+```
+
+### Install Java
+
+For JVM version management, install [Sdkman]()
+
+```shell
+# install sdkman
+curl -s "https://get.sdkman.io" | bash
+
+# install jvm (ex: java-17-temurin)
+sdk install java 17-tem
 ```
