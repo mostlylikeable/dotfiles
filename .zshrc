@@ -102,6 +102,11 @@ source ~/.zsh_profile
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Configure android sdk for react-native
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
 # Configure sdkman if installed
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -109,6 +114,35 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Init rbenv if installed
 [[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
 
-# Configure volta if installed
-export VOLTA_HOME="$HOME/.volta"
-[[ -d "$VOLTA_HOME" ]] && export PATH="$VOLTA_HOME/bin:$PATH"
+# Configure nvm if installed
+export NVM_DIR="$HOME/.nvm"
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# shellcheck disable=SC1091
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+if [ -f "$NVM_DIR/nvm.sh" ]; then
+  # Add hook to auto switch node version based on .nvmrc
+  # https://stackoverflow.com/a/39519460
+  autoload -U add-zsh-hook
+  nvm::nvmrc_hook() {
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        echo "node version ${nvmrc_node_version} not found, installing..."
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
+    fi
+  }
+  add-zsh-hook chpwd nvm::nvmrc_hook
+  nvm::nvmrc_hook
+fi
