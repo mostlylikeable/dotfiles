@@ -62,7 +62,6 @@ if [ -r "$HOME/.dotfiles-custom" ] && [ -f "$HOME/.dotfiles-custom" ]; then
   # shellcheck disable=SC1091
   source "$HOME/.dotfiles-custom"
 fi
-unset debug
 
 # Configure tab completion for bash
 if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
