@@ -21,8 +21,6 @@ bootstrap() {
     --exclude "sh/" \
     --exclude "config/" \
     --exclude "test/" \
-		--exclude ".bash_profile" \
-		--exclude ".bashrc" \
 		--exclude ".DS_Store" \
 		--exclude ".editorconfig" \
 		--exclude ".osx" \

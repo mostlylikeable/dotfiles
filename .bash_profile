@@ -52,7 +52,8 @@ utils.sh"
 echo "sourcing dotfiles from $DOTFILES_DIR"
 for file in $FILES; do
   # echo "  - $DOTFILES_DIR/sh/$file"
-  source $(realpath "$DOTFILES_DIR/sh/$file")
+  # shellcheck disable=SC1090
+  source "$(realpath "$DOTFILES_DIR/sh/$file")"
 done;
 unset file
 unset FILES
@@ -63,16 +64,15 @@ if [ -r "$HOME/.dotfiles-custom" ] && [ -f "$HOME/.dotfiles-custom" ]; then
   # shellcheck disable=SC1091
   source "$HOME/.dotfiles-custom"
 fi
-unset debug
 
 # Configure tab completion for bash
 if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-	# Ensure existing Homebrew v1 completions continue to work
+  # Ensure existing Homebrew v1 completions continue to work
   BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
-	export BASH_COMPLETION_COMPAT_DIR
+  export BASH_COMPLETION_COMPAT_DIR
   # shellcheck disable=SC1091
-	source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 elif [ -f /etc/bash_completion ]; then
   # shellcheck disable=SC1091
-	source /etc/bash_completion
+  source /etc/bash_completion
 fi
