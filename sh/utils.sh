@@ -7,7 +7,7 @@ alias pids="util::pids"
 alias uuid="util::uuid"
 
 # List processing using a port
-alias whoport="util:who_port"
+alias whoport="util::who_port"
 
 ###############################################################################
 # List pids and process name that match pattern
@@ -33,13 +33,13 @@ util::uuid() {
 }
 
 ###############################################################################
-# List processes using pid
+# List processes using port
 #
 # @param
-#   pid - the pid to search for
+#   port - the port to search for
 # @output
-#   the list of processes using the pid
+#   the list of processes using the port
 ###############################################################################
 util::who_port() {
-  lsof -i tcp:*
+  lsof -i tcp:$1
 }

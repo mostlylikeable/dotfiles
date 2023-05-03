@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 # Create and start containers in background, and wait for healthy
-alias dcu="docker-compose up --detach --wait"
+alias dcu="docker-compose up"
+
+# Create and start containers in background, and wait for healthy
+alias dcuw="docker-compose up --detach --wait"
 
 # Stop and remove containers and networks
 alias dcd="docker-compose down"
@@ -20,6 +23,9 @@ alias drmi="docker::rmi_dangling"
 
 # Stop all running containers
 alias dstop="docker::stop"
+
+# 
+alias dlogs="docker container logs $1"
 
 ###############################################################################
 # Stop containers

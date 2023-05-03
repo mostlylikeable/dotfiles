@@ -4,9 +4,11 @@
 # https://github.com/mathiasbynens/dotfiles/blob/main/brew.sh
 
 # Ensure we're up to date
+echo "Updating brew"
 brew update
 
 # Upgrade formulas
+echo "Upgrading formulae"
 brew upgrade
 
 # Save homebrew's location
@@ -32,11 +34,12 @@ brew install findutils
 
 # Install GNU `sed` and overwrite built-in
 # https://www.gnu.org/software/sed/
-brew install gnu-sed --with-default-names
+brew install gnu-sed
+ln -s "${BREW_PREFIX}/bin/gsed" "${BREW_PREFIX}/bin/sed"
 
 # Install modern bash
 brew install bash
-brew install bash-completion2
+brew install bash-completion@2
 
 # Switch to brew bash as default shell
 if ! grep -F -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
@@ -45,7 +48,7 @@ if ! grep -F -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
 fi;
 
 # Install more recent versions of some osx tools
-brew install vim --with-override-system-vi
+brew install vim
 brew install grep
 brew install openssh
 brew install screen
@@ -55,6 +58,8 @@ brew install gmp
 # Install other useful tools
 brew install ack
 brew install git
+brew install jq
+brew install python3
 
 # 7zip archive formatter
 # https://github.com/jinfeihan57/p7zip
@@ -73,6 +78,28 @@ brew install pv
 brew install tree
 
 ##################
+# AWS
+##################
+
+# https://formulae.brew.sh/formula/awscli
+brew install awscli
+
+##################
+# Docker
+##################
+
+# Dive docker image exploration tool
+# https://formulae.brew.sh/formula/dive
+brew install dive
+
+##################
+# Terraform
+##################
+
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+
+##################
 # React Native
 ##################
 
@@ -87,6 +114,11 @@ brew install cocoapods
 # Ruby version manager (for ReactNative)
 # https://formulae.brew.sh/formula/rbenv
 brew install rbenv ruby-build
+
+# Apple iOS Simulator tools
+# https://github.com/wix/AppleSimulatorUtils
+brew tap wix/brew
+brew install applesimutils
 
 # Remove outdated versions from the cellar
 brew cleanup

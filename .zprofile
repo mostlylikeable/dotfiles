@@ -51,7 +51,8 @@ utils.sh"
 echo "sourcing dotfiles from $DOTFILES_DIR"
 for file (${(f)FILES}); do
   # echo "  - $DOTFILES_DIR/sh/$file"
-  source $(realpath "$DOTFILES_DIR/sh/$file")
+  # source $(realpath "$DOTFILES_DIR/sh/$file")
+  source $(cd "$(dirname "$DOTFILES_DIR/sh/$file")" && pwd)/$(basename "$DOTFILES_DIR/sh/$file")
 done;
 unset file
 unset FILES
@@ -63,6 +64,7 @@ if [ -r "$HOME/.dotfiles-custom" ] && [ -f "$HOME/.dotfiles-custom" ]; then
   source "$HOME/.dotfiles-custom"
 fi
 
+export PATH="/opt/homebrew/bin:$PATH"
 # Configure tab completion for bash
 if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
   # Ensure existing Homebrew v1 completions continue to work

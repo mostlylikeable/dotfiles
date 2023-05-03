@@ -35,7 +35,7 @@ bootstrap() {
     . ~
 
   # shellcheck disable=SC1090
-  source ~/.zsh_profile
+  source ~/.zprofile
 }
 
 # if [ "$1" == "--force" ] || [ "$1" == "-f" ]; then

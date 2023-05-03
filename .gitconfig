@@ -1,184 +1,191 @@
 # Global .gitconfig
 [alias]
-  # List aliases, sorted
-  aliases = "!a() { git config --get-regexp alias | sort; }; a"
+	# List aliases, sorted
+	aliases = "!a() { git config --get-regexp alias | sort; }; a"
 
-  # Print user email from config
-  whoami = config user.email
+	# Print user email from config
+	whoami = config user.email
 
-  # Clone + submodules
-  cl = clone --recursive
+	# Clone + submodules
+	cl = clone --recursive
 
-  # Verbose list tags
-  tags = tag -l
+	# Verbose list tags
+	tags = tag -l
 
-  # Verbose list branches
-  br = branch --all
+	# Verbose list branches
+	br = branch --all
 
-  # Delete a branch if merged
-  brd = branch -d
+	# Delete a branch if merged
+	brd = branch -d
 
-  # Forece delete a branch
-  brD = branch -D
+	# Forece delete a branch
+	brD = branch -D
 
-  # Switch branch
-  #
-  # switch to branch
-  # g sw -c some-remote-branch
-  #
-  # switch back?
-  # g sw -
-  sw = switch
+	# Switch branch
+	#
+	# switch to branch
+	# g sw -c some-remote-branch
+	#
+	# switch back?
+	# g sw -
+	sw = switch
 
-  # checkout alias
-  co = checkout
+	# checkout alias
+	co = checkout
 
-  # Create a branch
-  cob = checkout -b
+	# Create a branch
+	cob = checkout -b
 
-  # Save a stash
-  ss = stash save
+	# Save a stash
+	ss = stash save
 
-  # List stashes
-  sl = stash list
+	# List stashes
+	sl = stash list
 
-  # Pop a stash
-  sp = stash pop
+	# Pop a stash
+	sp = stash pop
 
-  # Apply a stash
-  sa = stash apply
+	# Apply a stash
+	sa = stash apply
 
-  # Verbose list remotes
-  remotes = remote -v
+	# Verbose list remotes
+	remotes = remote -v
 
-  # Alias for adding upstream remote
-  remoteup = remote add upstream
+	# Alias for adding upstream remote
+	remoteup = remote add upstream
 
-  # Abbreviated sha, desc, graph last 20
-  ls = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# Abbreviated sha, desc, graph last 20
+	ls = log --pretty=oneline -n 20 --abbrev-commit
 
-  # Abbreviated sha, desc, graph last 20 all branches
-  lsa = log --pretty=oneline -n 20 --graph --abbrev-commit --all
+	# Abbreviated sha, desc, graph last 20 all branches
+	lsa = log --pretty=oneline -n 20 --graph --abbrev-commit
+	# log --oneline --graph --all --decorate
 
-  # Log last commit
-  last = log -1 HEAD --stat
+	# Log last commit
+	last = log -1 HEAD --stat
 
-  # Short format status
-  stat = status -s
+	# Short format status
+	stat = status -s
 
-  # Diff between latest and current
-  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
-  df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+	# Diff between latest and current
+	# https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+	df = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 
-  # Pull origin main
-  pom = pull origin main --recuse-submodules
+    # Pull origin
+	po = pull origin
 
-  # Pull upstream main
-  pum = pull upstream main --recurse-submodules
+	# Pull origin main
+	pom = pull origin main --recuse-submodules
 
-  # Get current branch name
-  currentbr = "!f() { \
-    local ref; \
-    ref=$(git symbolic-ref --quiet HEAD 2> /dev/null); \
-    local ret=$?; \
-    if [[ $ret != 0 ]]; \
-    then \
-      [[ $ret == 128 ]] && return; \
-      ref=$(git rev-parse --short HEAD 2> /dev/null) || return; \
-    fi; \
-    echo ${ref#refs/heads/}; \
-  }; f"
+	# Pull upstream main
+	pum = pull upstream main --recurse-submodules
 
-  # Push current branch to origin
-  pusho = !"git push origin $(git currentbr)"
+	# Get current branch name
+	currentbr = "!f() { \
+		local ref; \
+		ref=$(git symbolic-ref --quiet HEAD 2> /dev/null); \
+		local ret=$?; \
+		if [[ $ret != 0 ]]; \
+		then \
+			[[ $ret == 128 ]] && return; \
+			ref=$(git rev-parse --short HEAD 2> /dev/null) || return; \
+		fi; \
+		echo ${ref#refs/heads/}; \
+	}; f"
 
-  # Force push current branch to origin
-  fpusho = !"git push --force-with-lease origin $(git currentbr)"
+	# Push current branch to origin
+	pusho = !"git push origin $(git currentbr)"
 
-  # Push current branch to upstream
-  pushu = !"git push upstream $(git currentbr)"
+	# Force push current branch to origin
+	fpusho = !"git push --force-with-lease origin $(git currentbr)"
 
-  # Force push current branch to upstream
-  fpushu = !"git push --force-with-lease upstream $(git currentbr)"
+	# Push current branch to upstream
+	pushu = !"git push upstream $(git currentbr)"
 
-  # Commit verbose
-  cm = commit -v
+	# Force push current branch to upstream
+	fpushu = !"git push --force-with-lease upstream $(git currentbr)"
 
-  # Amend staged to last commit
-  cma = commit -v --amend --reuse-message=HEAD
+	# Commit verbose
+	cm = commit -v
 
-  # (squash) interactive rebase last N commits
-  sq = "!s() { git rebase -i HEAD~$1; }; s"
+	# Amend staged to last commit
+	cma = commit -v --amend --reuse-message=HEAD
 
-  # Undo last N (default 1) commits
-  undo = "!u() { git reset --soft HEAD~${1-1}; }; u"
+	# (squash) interactive rebase last N commits
+	sq = "!s() { git rebase -i HEAD~${1-2}; }; s"
 
-  # Rebase alias
-  rb = rebase
+	# Undo last N (default 1) commits
+	undo = "!u() { git reset --soft HEAD~${1-1}; }; u"
 
-  # Rebase main onto current
-  rbm = rebase main
+	# Rebase alias
+	rb = rebase
 
-  # Delete branches merged to main
-  prune-branches = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	# Rebase main onto current
+	rbm = rebase main
 
-  # Revert to pristine
-  nuke = reset --hard
+	# Delete branches merged to main
+	prune-branches = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 
-  # Rollback a file
-  rollback = checkout --
+	# Revert to pristine
+	nuke = reset --hard
 
-  # Unstage changes to a file
-  unstage = reset HEAD --
+	# Rollback a file
+	rollback = checkout --
+
+	# Unstage changes to a file
+	unstage = reset HEAD --
 
 [apply]
-  # Fix whitespace errors on patch
-  whitespace = fix
+	# Fix whitespace errors on patch
+	whitespace = fix
 
 [branch]
-  # List most recent branches first
-  sort = -committerdate
+	# List most recent branches first
+	sort = -committerdate
 
 [core]
-  # Global .gitignore
-  excludesfile = ~/.gitignore
+	# Global .gitignore
+	excludesfile = ~/.gitignore
 
-  # Globacl .gitattributes
-  attributesfile = ~/.gitattributes
+	# Globacl .gitattributes
+	attributesfile = ~/.gitattributes
 
-  # Make git rebase after for osx
-  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
-  # https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
-  trustctime = false
+	# Make git rebase after for osx
+	# https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+	# https://www.git-tower.com/blog/make-git-rebase-safe-on-osx
+	trustctime = false
 
-  # Prevent showing files with names containing non-ascii as untracked on osx
-  # https://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
-  precomposeunicode = true
+	# Prevent showing files with names containing non-ascii as untracked on osx
+	# https://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = true
 
-  # Speed up commands that involve determining untracked files such as git status
-  # https://git-scm.com/docs/git-update-index#_untracked_cache
-  untrackedCache = true
+	# Speed up commands that involve determining untracked files such as git status
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
 
 [diff]
-  # Detect copies in diff
-  renames = copies
+	# Detect copies in diff
+	renames = copies
 
 [diff "bin"]
-  # Use `hexdump` to diff binary files
-  # https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
-  textconv = hexdump -v -C
+	# Use `hexdump` to diff binary files
+	# https://github.com/mathiasbynens/dotfiles/blob/main/.gitconfig
+	textconv = hexdump -v -C
 
 [merge]
-  # Include summaries in merge commits
-  log = true
+	# Include summaries in merge commits
+	log = true
 
 [init]
-  defaultBranch = main
+	defaultBranch = main
 
 [help]
-  # Auto correct mistyped commands (delays 3s before running correction)
-  autocorrect = 30
+	# Auto correct mistyped commands (delays 3s before running correction)
+	autocorrect = 30
 
 [user]
-  name = mostlylikeable
-  email = mostlylikeble@gmail.com
+	name = mostlylikeable
+	email = 453302+mostlylikeable@users.noreply.github.com
+
+[includeIf "gitdir:~/dev/work/"]
+	path = .gitconfig-work

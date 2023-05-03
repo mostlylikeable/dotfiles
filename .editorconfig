@@ -11,3 +11,8 @@ insert_final_newline = true
 # don't add newlines to symlinks
 [bin/*]
 insert_final_newline = false
+
+# gitconfig should use tabs to match `git config` behavior
+[.gitconfig]
+indent_style = tab
+indent_size = 4

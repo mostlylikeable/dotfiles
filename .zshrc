@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/ben/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -74,7 +74,7 @@ ZSH_THEME="muse"
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/.zsh_profile
+source ~/.zprofile
 
 # User configuration
 
@@ -104,15 +104,21 @@ source ~/.zsh_profile
 
 # Configure android sdk for react-native
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+if [ -d "$ANDROID_HOME" ]; then
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
 
 # Configure sdkman if installed
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Init rbenv if installed
-[[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
+# [[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
+command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 
 # Configure nvm if installed
 export NVM_DIR="$HOME/.nvm"
@@ -146,3 +152,6 @@ if [ -f "$NVM_DIR/nvm.sh" ]; then
   add-zsh-hook chpwd nvm::nvmrc_hook
   nvm::nvmrc_hook
 fi
+
+# Add node bin scripts to path
+export PATH="./node_modules/.bin:$PATH"

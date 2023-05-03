@@ -5,8 +5,13 @@
 
 # Configure android sdk for react-native
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
-[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
-[ -d "$ANDROID_SDK_ROOT" ] && export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export ANDROID_HOME=$ANDROID_SDK_ROOT
+if [ -d "$ANDROID_HOME" ]; then
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/tools
+  export PATH=$PATH:$ANDROID_HOME/tools/bin
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
 
 # Configure sdkman if installed
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -14,7 +19,8 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Init rbenv if installed
-[[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
+# [[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
+command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 
 # Configure nvm if installed
 export NVM_DIR="$HOME/.nvm"
@@ -54,3 +60,7 @@ if [ -f "$NVM_DIR/nvm.sh" ]; then
     PROMPT_COMMAND="nvm::nvmrc_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
   fi
 fi
+
+# Add node bin scripts to path
+export PATH="./node_modules/.bin:$PATH"
+
