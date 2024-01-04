@@ -49,7 +49,7 @@ tint.sh
 utils.sh"
 
 # Source shell dotfiles
-echo "sourcing dotfiles from $DOTFILES_DIR"
+echo "(bash) sourcing dotfiles from $DOTFILES_DIR"
 for file in $FILES; do
   # echo "  - $DOTFILES_DIR/sh/$file"
   # shellcheck disable=SC1090
@@ -61,12 +61,12 @@ unset FILES
 
 # Source custom dotfiles configuration
 if [ -r "$HOME/.dotfiles-custom" ] && [ -f "$HOME/.dotfiles-custom" ]; then
-  echo "sourcing $HOME/.dotfiles-custom"
+  echo "(bash) sourcing $HOME/.dotfiles-custom"
   # shellcheck disable=SC1091
   source "$HOME/.dotfiles-custom"
 fi
 
-export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/bin/libexec/bin:$PATH"
 # Configure tab completion for bash
 if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
   # Ensure existing Homebrew v1 completions continue to work
