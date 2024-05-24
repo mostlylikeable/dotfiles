@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Enable zsh command completion
-autoload -U +X compinit && compinit
+# # Enable zsh command completion
+# autoload -U +X compinit && compinit
 
 # shellcheck disable=SC1091
 source "${DOTFILES_DIR}/sh/fs.sh"
@@ -10,7 +10,7 @@ source "${DOTFILES_DIR}/sh/print.sh"
 
 # Alias git and configure zsh for tab completion
 alias g="git"
-compdef g=git
+# compdef g=git
 
 # Git clone & cd
 alias clone="git::clone_cd"
@@ -97,4 +97,55 @@ git::current_branch() {
     ref=$(git::cmd rev-parse --short HEAD 2> /dev/null) || return
   fi
   echo "${ref#refs/heads/}"
+}
+
+# see: https://gist.github.com/eeichinger/1044107a1126901249b1164dac2fce15
+git-rpull() {
+  local dir;
+  for f in */.git/; do
+    if [[ -d "$f" && ! -L "$f" ]]; then
+      dir=$(dirname $f);
+      echo "\e[1;32m...::: Updating: $dir :::...\e[0m";
+      echo "\e[1;32mººººººººººººººººº$(printf 'º%.0s' {1..${#dir}})ººººººº\e[0m";
+      (pushd $dir >/dev/null; git-pull-main "$@" || exit 2);
+      echo ""
+    fi
+  done
+}
+
+git-pull-main() {
+  local cmd current_br main_br stash_pre stash_post;
+
+  [[ "$1" = "-d" || "$1" = "--dryrun" ]] && shift && cmd=echo;
+
+  # get current branch
+  current_br=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
+  echo "\e[2;37m  Current branch: ${current_br}\e[0m"
+
+  # get current stash head, stash, then get head again to check for stashed changes
+  stash_pre=$(git rev-parse -q --verify refs/stash);
+  $cmd git stash save -q -u 'before pull';
+  stash_post=$(git rev-parse -q --verify refs/stash);
+
+  # pull main
+  main_br=$(git branch -l main master --format '%(refname:short)');
+  if [ "${current_br}" != "$main_br" ]; then
+    echo "\e[2;37m  Switching to ${main_br}\e[0m";
+    $cmd git checkout $main_br >/dev/null;
+  fi
+
+  echo "\e[2;37m  Syncing `pwd` git:${main_br}\e[0m";
+  $cmd git pull --ff-only origin $main_br || exit 2;
+
+  # checkout previous branch
+  if [ "${current_br}" != "$main_br" ]; then
+    echo "\e[2;37m  Switching back to ${current_br}\e[0m";
+    $cmd git checkout "$current_br" >/dev/null;
+  fi
+
+  # pop stash if one was pushed
+  if [ "$stash_pre" != "$stash_post" ]; then
+    echo "\e[2;37m  Restoring stashed changes\e[0m"
+    $cmd git stash pop;
+  fi
 }

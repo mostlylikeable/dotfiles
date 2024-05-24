@@ -120,6 +120,12 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # [[ -z "$(rbenv --version 2> /dev/null)" ]] && eval "$(rbenv init - zsh)"
 command -v rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 
+# Enable zsh command completion
+autoload -U +X compinit && compinit
+
+# Alias git and configure zsh for tab completion
+compdef g=git
+
 # Configure nvm if installed
 export NVM_DIR="$HOME/.nvm"
 # shellcheck disable=SC1091

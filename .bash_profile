@@ -3,6 +3,9 @@
 # Inspired by:
 #   https://github.com/mathiasbynens/dotfiles/blob/main/.bash_profile
 
+# shellcheck disable=SC1090
+[ -n "$PS1" ] && source ~/.bashrc
+
 # Define dotfiles dir if unset or empty
 : "${DOTFILES_DIR:=$HOME/.dotfiles}"
 export DOTFILES_DIR
