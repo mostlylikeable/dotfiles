@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC1090
-[ -n "$PS1" ] && source ~/.bash_profile
+# # shellcheck disable=SC1090
+# [ -n "$PS1" ] && source ~/.bash_profile
 
 # Configure android sdk for react-native
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk

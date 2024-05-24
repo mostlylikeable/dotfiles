@@ -18,7 +18,7 @@ if [[ -d "${DEV_DIR}" ]]; then
   alias dev='cd ${DEV_DIR}'
 
   # For separating wip/personal from work projects
-  alias mine='cd ${DEV_DIR}/mine'
+  alias me='cd ${DEV_DIR}/me'
   alias work='cd ${DEV_DIR}/work'
 
   # Add "dev" dirs, and project dirs from each "dev" dir to CDPATH
@@ -31,7 +31,7 @@ if [[ -d "${DEV_DIR}" ]]; then
   #   cd my-project
   #   cd work-project
   setopt auto_cd
-  cdpath=($DEV_DIR/mine $DEV_DIR/work)
+  cdpath=($DEV_DIR/me $DEV_DIR/work)
 fi
 
 # Some of these are order dependent

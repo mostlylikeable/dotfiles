@@ -38,3 +38,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # launch chrome
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# terraform
+alias tf="terraform"
