@@ -10,3 +10,11 @@
 # Random notes
 me.md
 todo.md
+
+# Misc
+*.old
+temp.*
+tmp.*
+*.temp
+*.tmp
+*.bk
