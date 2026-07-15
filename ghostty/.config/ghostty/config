@@ -1,0 +1,16 @@
+# ~/.config/ghostty/config — Ghostty terminal. Syntax is `key = value`.
+
+# Font.
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+
+# Built-in theme.
+theme = "catppuccin-mocha"
+
+# Cursor.
+cursor-style = block
+cursor-style-blink = true
+
+# Window padding.
+window-padding-x = 8
+window-padding-y = 8

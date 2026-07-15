@@ -1,0 +1,17 @@
+{
+  // dprint — markdown FORMATTER (mise run fmt:md / fmt:md:check). Owns layout:
+  // unwraps prose so the viewer decides wrapping, and aligns tables.
+  // markdownlint-cli2 owns semantic linting and disables layout rules that would
+  // fight this formatter (see .markdownlint-cli2.yaml).
+  "markdown": {
+    "textWrap": "never"
+  },
+  "excludes": [
+    "test/bats/**",
+    "test/test_helper/**",
+    "node_modules/**"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/markdown-0.22.1.wasm"
+  ]
+}

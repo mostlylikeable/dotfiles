@@ -1,0 +1,3 @@
+# terraform module — HashiCorp Terraform.
+tap "hashicorp/tap"
+brew "hashicorp/tap/terraform"

@@ -1,0 +1,44 @@
+# Global gitignore (core.excludesfile). Applies to every repo.
+
+# macOS junk
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.fseventsd
+
+# Editors / IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# Node / JS
+node_modules/
+dist/
+build/
+.cache/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.local
+
+# Rust / JVM
+target/
+.gradle/
+
+# Logs
+*.log
+
+# direnv
+.direnv/
+
+# Agent scratch
+.claude/local/

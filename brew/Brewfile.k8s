@@ -1,0 +1,4 @@
+# k8s module — Kubernetes CLIs.
+brew "kubernetes-cli" # kubectl
+brew "k9s"
+brew "helm"

@@ -1,0 +1,14 @@
+// Shared VS Code + Cursor keybindings. Placed by os/macos/stow-post.sh.
+[
+  // Move lines with Alt+Up/Down is default; add duplicate line on Shift+Alt+D.
+  {
+    "key": "shift+alt+d",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  // Toggle the integrated terminal with Ctrl+`.
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  }
+]

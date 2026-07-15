@@ -1,0 +1,4 @@
+# python module — CPython via mise. Build deps: brew/Brewfile.python.
+
+[tools]
+python = "3.12"

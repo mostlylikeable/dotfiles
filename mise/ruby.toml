@@ -1,0 +1,4 @@
+# ruby module — MRI via mise. Build deps: brew/Brewfile.ruby.
+
+[tools]
+ruby = "3.3"

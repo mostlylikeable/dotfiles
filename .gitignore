@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# editor scratch
+*.swp
+*.tmp
+*.temp
+*.bk
+*.old
+
+# personal scratch (see me.md / me-list tooling)
+me.md
+todo.md
+.old/
+.ignored/
+
+# never commit resolved secrets or machine-local overrides
+secrets.zsh
+local.zsh
+
+# lefthook per-developer hook overrides (see lefthook.yml)
+lefthook-local.yml
+
+# TODO: should not be referenced here? should be .gitconfig-local?
+.gitconfig-work

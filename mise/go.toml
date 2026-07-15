@@ -1,0 +1,4 @@
+# go module — Go toolchain via mise.
+
+[tools]
+go = "latest"

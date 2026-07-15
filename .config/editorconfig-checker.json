@@ -1,0 +1,11 @@
+{
+  "$comment": "editorconfig-checker reads .editorconfig for the rules. This file scopes what it walks and disables line-length enforcement (max_line_length is an editor ruler only, not a gate).",
+  "Exclude": [
+    "^test/bats/",
+    "^test/test_helper/",
+    "\\.git/"
+  ],
+  "Disable": {
+    "MaxLineLength": true
+  }
+}

@@ -1,0 +1,11 @@
+# mobile-rn module — React Native native toolchain (iOS + Android).
+#
+# Depends on js + jvm modules (auto-enabled). The Android JDK version override
+# lives in mise/mobile-rn.toml; this fragment is only Homebrew-owned native deps.
+
+brew "watchman"     # file-watching daemon Metro/RN relies on
+brew "cocoapods"    # iOS dependency manager (`pod install` for the ios/ project)
+
+# Detox end-to-end testing needs applesimutils to drive the iOS simulator.
+tap "wix/brew"
+brew "wix/brew/applesimutils"

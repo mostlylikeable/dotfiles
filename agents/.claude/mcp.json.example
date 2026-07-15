@@ -1,0 +1,20 @@
+// EXAMPLE MCP server config. Copy to ~/.claude/mcp.json and fill in real values.
+//
+// The real `mcp.json` is UNTRACKED — never commit it. Reference secrets via
+// 1Password `op://vault/item/field` URIs (resolved by `op run` / `op inject`),
+// never as plaintext keys in a tracked file.
+//
+// NOTE: this file intentionally contains comments, so it is kept as `.example`
+// and is NOT strict JSON. The real mcp.json must be valid JSON (no comments).
+{
+  "mcpServers": {
+    "example-http": {
+      "command": "npx",
+      "args": ["-y", "@example/mcp-server"],
+      "env": {
+        "API_KEY": "op://Personal/Example MCP/api_key",
+        "BASE_URL": "https://api.example.com"
+      }
+    }
+  }
+}

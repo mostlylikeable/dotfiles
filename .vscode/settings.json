@@ -1,0 +1,16 @@
+{
+  "files.associations": {
+    // Map Brewfile bundle fragments to Ruby syntax highlighting, matching Homebrew's own Brewfile DSL.
+    "Brewfile": "ruby",
+    "Brewfile.*": "ruby",
+    "*.bats": "shellscript",
+    // Extension-less config files: no language is inferred by filename alone,
+    // so highlight each by its actual syntax.
+    "**/bat/.config/bat/config": "shellscript",
+    "**/ghostty/.config/ghostty/config": "ini",
+    // JSON files with `//` comments that VS Code doesn't auto-map to jsonc
+    // (only its own canonical config paths like .vscode/settings.json get that for free).
+    "dprint.json": "jsonc",
+    "**/os/macos/vscode/settings.json": "jsonc"
+  }
+}

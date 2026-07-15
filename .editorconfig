@@ -1,0 +1,36 @@
+# https://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+# Advisory: long lines aren't safely auto-fixable, so this isn't gated.
+max_line_length = 100
+
+# git writes these with tabs
+[{.gitconfig,.gitmodules}]
+indent_style = tab
+indent_size = 4
+
+# shfmt reads these (bash semantics, per .shellcheckrc). Keeps formatter
+# behavior declared here rather than in mise task flags.
+[*.sh]
+shell_variant = bash
+switch_case_indent = true
+
+# launcher shims are copied verbatim
+[bin/.local/bin/*]
+insert_final_newline = false
+
+# Markdown: keep trailing whitespace (hard line breaks); prose indentation is
+# semantic (list-continuation alignment, nested fences) so don't enforce it.
+[*.md]
+trim_trailing_whitespace = false
+indent_style = unset
+indent_size = unset
+# Line length is editor-driven for prose (soft wrap, no hardcoded breaks).
+max_line_length = off

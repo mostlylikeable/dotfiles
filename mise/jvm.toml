@@ -1,0 +1,4 @@
+# jvm module — JDK via mise. mobile-rn may override the version when also selected.
+
+[tools]
+java = "temurin-21"

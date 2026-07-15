@@ -1,0 +1,26 @@
+# core module — the modern CLI baseline. Every preset includes this.
+# brew de-duplicates against the base Brewfile, so overlaps are harmless.
+
+# Navigation + listing.
+brew "eza"          # ls replacement (icons, tree, git-aware)
+brew "zoxide"       # smarter cd (z)
+brew "fzf"          # fuzzy finder (wired into zsh via `fzf --zsh`)
+
+# File viewing / search.
+brew "bat"          # cat with syntax highlighting (also our MANPAGER)
+brew "ripgrep"      # fast grep (rg)
+brew "fd"           # fast find
+
+# Prompt + multiplexer + env.
+brew "starship"     # prompt (config in starship/.config/starship.toml)
+brew "tmux"
+brew "direnv"       # per-directory env (hooked in .zshrc)
+brew "mise"         # runtime version manager (replaces nvm/rbenv/sdkman)
+
+# Quality-of-life.
+brew "tlrc"         # tldr client (community man-page examples)
+brew "btop"         # process/resource monitor
+brew "dust"         # du, but a tree with bars
+brew "duf"          # df, but readable
+brew "hyperfine"    # command benchmarking
+brew "gum"          # TUI primitives (used by install.sh's interactive menu)

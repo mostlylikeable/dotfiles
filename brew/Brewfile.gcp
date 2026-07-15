@@ -1,0 +1,2 @@
+# gcp module — Google Cloud CLI.
+cask "gcloud-cli"

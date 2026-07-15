@@ -1,0 +1,14 @@
+# shellcheck configuration
+# The sh/ library and install scripts target bash semantics.
+shell=bash
+
+# Follow `source` directives across files where possible.
+external-sources=true
+
+# SC1091: sourced file not found / not followed in CI (paths resolve at runtime).
+disable=SC1091
+
+# Opt-in extra that catches a real footgun: unquoted vars that can word-split
+# or glob. We deliberately do NOT enable require-variable-braces — mandatory
+# ${braces} on every $1/$HOME is pure style churn with no correctness benefit.
+enable=quote-safe-variables

@@ -1,0 +1,16 @@
+# Taplo — TOML formatter/linter config. Formatting mirrors .editorconfig
+# (2-space indent, LF, final newline). Key/array order is preserved so it never
+# reshuffles mise/starship/direnv configs.
+include = ["**/*.toml"]
+exclude = ["test/bats/**", "test/test_helper/**", ".git/**"]
+
+[formatting]
+indent_string = "  "        # matches .editorconfig
+reorder_keys = false        # preserve semantic ordering
+reorder_arrays = false
+align_entries = false
+array_auto_expand = false
+array_auto_collapse = false
+compact_arrays = true
+trailing_newline = true
+crlf = false

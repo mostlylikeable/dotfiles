@@ -1,0 +1,19 @@
+# casks — GUI apps + fonts, installed only when GUI is enabled.
+#
+# homebrew/cask-fonts was merged into homebrew/cask, so fonts need no extra tap.
+
+cask "font-jetbrains-mono-nerd-font"   # patched font w/ icons for the terminal
+
+# Editors.
+cask "visual-studio-code"
+cask "cursor"
+
+# Terminals.
+cask "ghostty"
+cask "iterm2"
+
+# Launcher.
+cask "raycast"
+
+# 1Password CLI (current Homebrew ships it as a cask, not a formula).
+cask "1password-cli"

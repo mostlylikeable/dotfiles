@@ -1,0 +1,4 @@
+# rust module — Rust toolchain via mise.
+
+[tools]
+rust = "latest"

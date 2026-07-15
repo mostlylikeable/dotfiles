@@ -1,0 +1,12 @@
+{
+  // Recommended extensions for working in this dotfiles repo.
+  "recommendations": [
+    "timonwong.shellcheck",
+    "foxundermoon.shell-format",
+    "editorconfig.editorconfig",
+    "tamasfe.even-better-toml",
+    "github.vscode-github-actions",
+    "davidanson.vscode-markdownlint",
+    "mkhl.direnv"
+  ]
+}

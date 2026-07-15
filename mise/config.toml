@@ -1,0 +1,9 @@
+# Base mise global config, symlinked to ~/.config/mise/config.toml by the
+# installer's mise phase. Per-module tool sets land in conf.d/<module>.toml
+# (mise merges conf.d automatically). Language runtimes live in those fragments
+# (e.g. mise/js.toml) so selecting a module adds its tools without editing this
+# file.
+
+[settings]
+# Let node read idiomatic version files (.nvmrc / .node-version) when js is on.
+idiomatic_version_file_enable_tools = ["node"]

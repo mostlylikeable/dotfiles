@@ -1,0 +1,27 @@
+{
+  "Profiles": [
+    {
+      "Name": "dotfiles",
+      "Guid": "dotfiles-default-0001",
+      "Dynamic Profile Parent Name": "Default",
+
+      "Normal Font": "JetBrainsMonoNFM-Regular 13",
+      "Non Ascii Font": "JetBrainsMonoNFM-Regular 13",
+      "Use Non-ASCII Font": false,
+      "Horizontal Spacing": 1,
+      "Vertical Spacing": 1,
+
+      "Scrollback Lines": 50000,
+      "Option Key Sends": 2,
+      "Right Option Key Sends": 2,
+      "Silence Bell": true,
+      "Visual Bell": true,
+      "Blur": false,
+      "Transparency": 0.05,
+
+      "Foreground Color": { "Red Component": 0.85, "Green Component": 0.85, "Blue Component": 0.85 },
+      "Background Color": { "Red Component": 0.11, "Green Component": 0.12, "Blue Component": 0.15 },
+      "Cursor Color":     { "Red Component": 0.85, "Green Component": 0.85, "Blue Component": 0.85 }
+    }
+  ]
+}

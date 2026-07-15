@@ -1,0 +1,4 @@
+# git module — git ergonomics beyond plain `git`.
+brew "gh"           # GitHub CLI (auth, PRs, gh::org-clone in sh/git.sh)
+brew "git-delta"    # syntax-highlighting pager for diffs (configured in git/)
+brew "lazygit"      # terminal UI for git

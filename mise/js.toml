@@ -1,0 +1,4 @@
+# js module — Node.js runtime (mise).
+
+[tools]
+node = "lts"

@@ -1,0 +1,18 @@
+# antidote plugin bundle — one plugin per line, `user/repo`.
+# Loaded by .zshrc into a cached static file. Order matters: zsh-defer first,
+# syntax-highlighting last. `kind:defer` defers a plugin's load off the
+# critical path to first prompt (see ADR-0003).
+
+# Deferred-loading engine — must be sourced before any `kind:defer` plugin.
+romkatv/zsh-defer
+
+# Completions: definitions must exist before compinit, so load eagerly.
+zsh-users/zsh-completions
+
+# Interactive UX — safe to defer until after first prompt.
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer
+Aloxaf/fzf-tab kind:defer
+
+# Syntax highlighting must be loaded LAST so it wraps all other widgets.
+zdharma-continuum/fast-syntax-highlighting kind:defer

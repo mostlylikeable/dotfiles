@@ -1,0 +1,63 @@
+# Main git config. Indented with tabs (git's native style).
+#
+# Identity is intentionally NOT committed here — this repo is shared/turnkey.
+# Personal identity lives in an untracked include:
+#     ~/.config/git/identity   (copy from ~/.config/git/identity.example)
+# Work identity is applied only inside ~/dev/work/ via a conditional include:
+#     ~/.gitconfig-work        (copy from this repo's git/.gitconfig-work.example)
+[init]
+	defaultBranch = main
+
+[pull]
+	ff = only
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[core]
+	excludesfile = ~/.config/git/ignore
+	attributesfile = ~/.config/git/attributes
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = decorations
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+	syntax-theme = ansi
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+	colorMoved = default
+
+[fetch]
+	prune = true
+
+[rerere]
+	enabled = true
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	last = log -1 HEAD
+	unstage = reset HEAD --
+	amend = commit --amend --no-edit
+	aliases = config --get-regexp ^alias\\.
+	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
+
+# Personal identity (untracked). Copy the template, then edit:
+#   cp ~/.config/git/identity.example ~/.config/git/identity
+[include]
+	path = ~/.config/git/identity
+
+# Work identity, applied only to repos under ~/dev/work/.
+[includeIf "gitdir:~/dev/work/"]
+	path = ~/.gitconfig-work

@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    name: mise run lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # zsh is a system dependency (mise doesn't provide it). Everything else —
+      # shellcheck, shfmt, taplo, actionlint, editorconfig-checker, dprint,
+      # markdownlint-cli2 — is pinned in mise.toml and installed below.
+      - name: Install zsh
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh
+
+      - uses: jdx/mise-action@v2
+        with:
+          install: true
+          cache: true
+
+      - name: mise run lint
+        run: mise run lint
+
+  bats:
+    name: bats (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install stow (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y stow
+
+      - name: Install stow (macOS)
+        if: runner.os == 'macOS'
+        run: brew install stow
+
+      - name: Configure git identity (for git-heavy tests)
+        run: |
+          git config --global user.name  "CI"
+          git config --global user.email "ci@example.com"
+          git config --global init.defaultBranch main
+
+      - name: Run bats
+        run: ./test/bats/bin/bats test/
+
+  brewfile:
+    name: Brewfile syntax
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compose + validate Brewfile fragments
+        run: |
+          tmp="$(mktemp)"
+          cat Brewfile brew/Brewfile.core brew/Brewfile.git >"$tmp"
+          echo "----- composed Brewfile -----"
+          cat "$tmp"
+          echo "-----------------------------"
+          # Goal is to catch syntax/typos, not to require everything installed,
+          # so a missing-formula result must not fail CI.
+          brew bundle check --file="$tmp" || true
+          # `list` parses the file and errors on real syntax problems.
+          brew bundle list --file="$tmp"

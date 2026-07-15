@@ -1,0 +1,5 @@
+# mobile-rn module — JDK pin for the Android Gradle toolchain. Overrides the
+# jvm module's temurin-21 when both are selected (conf.d load order).
+
+[tools]
+java = "temurin-17"

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# subl — launch Sublime Text from the CLI on macOS.
+# Prefer the app bundle's bundled `subl` binary; fall back to `open -a`.
+set -euo pipefail
+
+cli="/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl"
+
+if [[ -x "$cli" ]]; then
+  exec "$cli" "$@"
+fi
+
+# If Sublime Text isn't installed, `open` exits 1 with "Unable to find
+# application named 'Sublime Text'" on stderr.
+exec open -a "Sublime Text" "$@"

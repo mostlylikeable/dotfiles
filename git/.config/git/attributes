@@ -1,0 +1,23 @@
+# Global gitattributes (core.attributesfile).
+
+* text=auto eol=lf
+
+# Common binary types — never diff/merge as text.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp4 binary
+*.mov binary
+
+# Linguist hints (optional).
+*.lock linguist-generated=true

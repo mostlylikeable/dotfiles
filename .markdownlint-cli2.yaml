@@ -1,0 +1,22 @@
+# markdownlint-cli2 — markdown linter/formatter config.
+# `mise run lint:md` checks; `mise run fmt:md` (--fix) auto-fixes.
+config:
+  default: true
+  MD013: false   # line length — editor-driven (see .editorconfig max_line_length)
+  MD033: false   # inline HTML — used in some docs
+  MD041: false   # first line need not be a top-level heading
+  # table pipe alignment — check-only (no auto-fix exists) and cosmetic (render is
+  # identical), so it would just nag. We don't hand-align tables; leave it off.
+  MD060: false
+  # Allow exactly 2 trailing spaces as a hard line break (see .editorconfig).
+  MD009:
+    br_spaces: 2
+
+# Checked file set (submodules + node_modules excluded).
+globs:
+  - "**/*.md"
+
+ignores:
+  - "test/bats/**"
+  - "test/test_helper/**"
+  - "node_modules/**"

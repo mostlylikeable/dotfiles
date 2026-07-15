@@ -1,0 +1,3 @@
+# python module — native BUILD dependencies for mise-compiled Python.
+brew "openssl@3"
+brew "readline"

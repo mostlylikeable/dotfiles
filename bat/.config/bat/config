@@ -1,0 +1,6 @@
+# ~/.config/bat/config — bat (cat clone) options.
+
+# Color theme.
+--theme="TwoDark"
+
+--style="numbers,changes,header"

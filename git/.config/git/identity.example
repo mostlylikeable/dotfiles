@@ -1,0 +1,9 @@
+# Personal identity template.
+#
+# To activate:
+#   cp ~/.config/git/identity.example ~/.config/git/identity
+#
+# then edit the values below. ~/.config/git/identity is untracked.
+[user]
+  name = Your Name
+  email = you@personal.example

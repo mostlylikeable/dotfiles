@@ -1,0 +1,5 @@
+# Repo-local attributes (distinct from the global git/.config/git/attributes
+# stow package). Linguist doesn't recognize brew/Brewfile.<bundle> by filename
+# the way it does a bare "Brewfile", so force it to highlight as Ruby.
+Brewfile linguist-language=Ruby
+brew/Brewfile.* linguist-language=Ruby

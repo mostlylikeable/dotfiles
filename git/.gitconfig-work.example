@@ -1,0 +1,15 @@
+# Work identity template.
+#
+# This file is applied only to repos under ~/dev/work/ (see the conditional
+# include in ~/.gitconfig). To activate:
+#
+#   cp ~/dev/me/dotfiles2/git/.gitconfig-work.example ~/.gitconfig-work
+#
+# then edit the values below. ~/.gitconfig-work is untracked.
+[user]
+  name = Your Name
+  email = you@work.example
+
+# Optional: use a dedicated SSH key for work remotes.
+# [core]
+#   sshCommand = ssh -i ~/.ssh/id_work -o IdentitiesOnly=yes

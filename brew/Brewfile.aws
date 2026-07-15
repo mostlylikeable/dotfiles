@@ -1,0 +1,2 @@
+# aws module — Amazon Web Services CLI.
+brew "awscli"

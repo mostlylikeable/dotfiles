@@ -1,0 +1,139 @@
+# Repo-LOCAL dev tooling for working ON this repo. Active only when your cwd is
+# inside the repo — this is NOT the stowed user config (that's `mise/config.toml`,
+# which lands at ~/.config/mise/config.toml). Nothing here ships to a machine.
+#
+# Bootstrap:  mise install && mise run setup
+# Everyday:   mise run fmt   |   mise run lint   |   mise run test   |   mise run check
+#
+# These tasks are the single source of truth: the lefthook pre-commit hook and CI
+# both call them, so "works locally" == "passes CI".
+
+[tools]
+# Pinned so local == CI. Bump deliberately.
+actionlint = "1.7.12"              # GitHub Actions workflow linter
+dprint = "0.55.2"                  # markdown formatter (unwraps prose, aligns tables)
+editorconfig-checker = "3.8.0"     # enforces .editorconfig
+lefthook = "2.1.10"                # git hook manager
+node = "lts"                       # runtime for the npm-backed markdown linter
+shfmt = "3.13.1"                   # shell formatter (reads .editorconfig)
+shellcheck = "0.11.0"              # shell linter (reads .shellcheckrc)
+taplo = "0.10.0"                   # TOML formatter/linter
+"npm:markdownlint-cli2" = "0.23.0" # markdown linter (semantics; dprint owns layout)
+
+[settings]
+# Let node read idiomatic version files (.nvmrc / .node-version).
+idiomatic_version_file_enable_tools = ["node"]
+
+# ---- shell -----------------------------------------------------------------
+# The .sh set is bash-compatible (see .shellcheckrc / AGENTS.md). zsh files are
+# parse-checked only (shfmt/shellcheck don't speak zsh). Vendored bats submodules
+# under test/bats and test/test_helper are always excluded.
+
+[tasks."lint:shell"]
+description = "shellcheck all bash-compatible *.sh"
+run = '''
+find . -name '*.sh' \
+  -not -path './test/bats/*' \
+  -not -path './test/test_helper/*' \
+  -not -path './.git/*' \
+  -print0 | xargs -0 shellcheck
+'''
+
+[tasks."lint:zsh"]
+description = "zsh -n parse check on zsh files"
+run = '''
+find zsh -type f \
+  \( -name '.zshenv' -o -name '.zprofile' -o -name '.zshrc' -o -name '*.zsh' \) \
+  -print0 | xargs -0 -n1 zsh -n
+'''
+
+[tasks."fmt:shell"]
+description = "shfmt --write on *.sh"
+run = '''
+find . -name '*.sh' \
+  -not -path './test/bats/*' \
+  -not -path './test/test_helper/*' \
+  -not -path './.git/*' \
+  -print0 | xargs -0 shfmt -w
+'''
+
+[tasks."fmt:shell:check"]
+description = "shfmt --diff (fails if unformatted)"
+run = '''
+find . -name '*.sh' \
+  -not -path './test/bats/*' \
+  -not -path './test/test_helper/*' \
+  -not -path './.git/*' \
+  -print0 | xargs -0 shfmt -d
+'''
+
+# ---- toml -------------------------------------------------------------------
+# taplo reads .taplo.toml for include/exclude + formatting options.
+
+[tasks."fmt:toml"]
+description = "taplo fmt (write)"
+run = "taplo fmt"
+
+[tasks."fmt:toml:check"]
+description = "taplo fmt --check"
+run = "taplo fmt --check"
+
+# ---- markdown ---------------------------------------------------------------
+# Two tools, split by concern (see docs/adr/0006): dprint FORMATS layout (reads
+# dprint.json — unwraps prose, aligns tables), markdownlint-cli2 LINTS semantics
+# (reads .markdownlint-cli2.yaml).
+
+[tasks."fmt:md"]
+description = "dprint fmt (markdown formatter — unwraps prose, aligns tables)"
+run = "dprint fmt"
+
+[tasks."fmt:md:check"]
+description = "dprint check (fails if unformatted)"
+run = "dprint check"
+
+[tasks."lint:md"]
+description = "markdownlint-cli2 (semantic checks; dprint owns layout)"
+run = "markdownlint-cli2"
+
+# ---- workflows + editorconfig ----------------------------------------------
+
+[tasks."lint:actions"]
+description = "actionlint on .github/workflows"
+run = "actionlint"
+
+[tasks."lint:editorconfig"]
+description = "editorconfig-checker (binary: ec) — reads .editorconfig + .config/editorconfig-checker.json"
+run = "ec -config .config/editorconfig-checker.json"
+
+# ---- tests ------------------------------------------------------------------
+
+[tasks.test]
+description = "bats suite (vendored runner)"
+run = "./test/bats/bin/bats test/"
+
+# ---- aggregates -------------------------------------------------------------
+
+[tasks.fmt]
+description = "auto-format everything (shell, toml, markdown)"
+depends = ["fmt:shell", "fmt:toml", "fmt:md"]
+
+[tasks.lint]
+description = "all read-only checks (what CI runs)"
+depends = [
+  "lint:shell",
+  "lint:zsh",
+  "lint:actions",
+  "lint:md",
+  "lint:editorconfig",
+  "fmt:shell:check",
+  "fmt:toml:check",
+  "fmt:md:check",
+]
+
+[tasks.check]
+description = "lint + test"
+depends = ["lint", "test"]
+
+[tasks.setup]
+description = "install git hooks (one-time contributor bootstrap)"
+run = "lefthook install"

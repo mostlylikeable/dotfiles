@@ -1,0 +1,9 @@
+{
+  "includeCoAuthoredBy": true,
+  "permissions": {
+    "allow": [],
+    "deny": [],
+    "ask": []
+  },
+  "env": {}
+}
