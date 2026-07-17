@@ -1,6 +1,5 @@
 # Starship prompt. https://starship.rs/config/
-# Designed to read well with a Nerd Font (JetBrainsMono Nerd Font is installed
-# by the casks bundle) but degrades gracefully without one.
+# Approximates the oh-my-zsh "muse" theme this machine used before.
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
@@ -8,53 +7,42 @@ format = """
 $directory\
 $git_branch\
 $git_status\
-$nodejs\
 $python\
-$rust\
-$golang\
-$java\
-$cmd_duration\
-$line_break\
 $character"""
 
-add_newline = true
+add_newline = false
 
 [character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold yellow)"
+success_symbol = "[ ᐅ](fg:77)"
+error_symbol = "[ ᐅ](fg:160)"
 
 [directory]
-truncation_length = 3
-truncate_to_repo = true
-style = "bold cyan"
+truncation_length = 0
+truncate_to_repo = false
+style = "fg:117"
+format = "[$path]($style)"
 
 [git_branch]
-symbol = " "
-style = "bold purple"
+format = " [(${branch})](fg:12)"
 
 [git_status]
-style = "bold yellow"
+format = "[$all_status$ahead_behind](fg:133)"
+style = "fg:133"
+conflicted = "═"
+untracked = "✭"
+modified = "✹"
+staged = "✚"
+renamed = "➜"
+deleted = "✖"
+stashed = ""
+ahead = ""
+behind = ""
+diverged = ""
 
-[cmd_duration]
-min_time = 2000
-format = "[$duration]($style) "
-style = "dimmed white"
-
-[nodejs]
-symbol = " "
-format = "[$symbol($version )]($style)"
-
+# Muse showed `[venv]`; only render when a venv is active (no version noise).
 [python]
-symbol = " "
-format = "[$symbol($version )]($style)"
-
-[java]
-symbol = " "
-format = "[$symbol($version )]($style)"
-
-[golang]
-symbol = " "
-
-[rust]
-symbol = " "
+format = ' [[$virtualenv]](fg:133)'
+detect_extensions = []
+detect_files = []
+detect_folders = []
+detect_env_vars = ["VIRTUAL_ENV", "CONDA_DEFAULT_ENV"]
