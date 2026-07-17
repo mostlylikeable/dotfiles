@@ -3,7 +3,7 @@
 # Preset + module definitions. A *preset* is a named default set of *modules*
 # (plus a default GUI flag). A *module* may contribute stow packages, a Brewfile
 # fragment, a mise manifest, and later other install hooks. install.sh resolves
-# selection here so the TUI and CLI flags share one source of truth (ADR-0007).
+# selection here so the TUI and CLI flags share one source of truth.
 
 [[ -n "${_DOTFILES_MODULES_SH:-}" ]] && return 0
 _DOTFILES_MODULES_SH=1
@@ -212,7 +212,7 @@ modules::selection_save() {
   dir="$(dirname "$path")"
   mkdir -p "$dir"
   cat >"$path" <<EOF
-# dotfiles install selection — written by install.sh (ADR-0007)
+# dotfiles install selection — written by install.sh
 preset=$preset
 gui=$gui
 modules=$modules

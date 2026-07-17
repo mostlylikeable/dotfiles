@@ -1,18 +1,18 @@
 # AGENTS.md — discipline rules for this repo
 
-This file is the **single source of truth** for any AI agent (or human) editing **this dotfiles repo**. Follow these rules exactly. The _why_ behind them lives in [`docs/adr/`](docs/adr/); this file is the _what_.
+This file is the **single source of truth** for any AI agent (or human) editing **this dotfiles repo**. Follow these rules exactly.
 
 > Not to be confused with `agents/AGENTS.md`, which is a **template** that stows to `~/AGENTS.md` (personal, cross-project rules). This root file governs work _inside this repository only_.
 
 ## Hard rules
 
-1. **Real names, no templating.** Dotfiles are stored under their REAL names (`.zshrc`, `.gitconfig`), never chezmoi-style `dot_` mangling and never Go template syntax. Content stays tool-agnostic (ADR-0001).
+1. **Real names, no templating.** Dotfiles are stored under their REAL names (`.zshrc`, `.gitconfig`), never chezmoi-style `dot_` mangling and never Go template syntax. Content stays tool-agnostic.
 
 2. **Per-machine / per-OS differences go in SOURCED shell behind guards** — an `if [[ -d ... ]]`, an `$OSTYPE` check, or an untracked override file — never in templates. If a value differs by machine, it belongs in guarded shell or in `local.zsh`, not baked into a tracked config.
 
 3. **Orchestration stays in plain scripts.** Setup logic lives in `Brewfile`, `os/macos/*.sh`, and `install.sh` (+ `lib/*.sh`). Do not introduce a templating DSL or a declarative manager to do orchestration.
 
-4. **Secrets ONLY via untracked `secrets.zsh`; machine overrides via untracked `local.zsh`.** Never commit either. Never hardcode a secret in a tracked file. `secrets.zsh` holds values (supports `op read` or plaintext); `local.zsh` holds non-secret machine overrides and is sourced LAST so it wins (ADR-0005). Both are already in `.gitignore` — keep them there.
+4. **Secrets ONLY via untracked `secrets.zsh`; machine overrides via untracked `local.zsh`.** Never commit either. Never hardcode a secret in a tracked file. `secrets.zsh` holds values (supports `op read` or plaintext); `local.zsh` holds non-secret machine overrides and is sourced LAST so it wins. Both are already in `.gitignore` — keep them there.
 
 5. **macOS-only config is isolated** under `os/macos/` (orchestration: `defaults.sh`, `stow-post.sh`) and `sh/os/macos.sh` (shell helpers, sourced behind an `$OSTYPE` guard). Leave room for a future `sh/os/linux.sh` to drop in alongside — do not hardwire macOS assumptions into shared files.
 
@@ -29,7 +29,7 @@ This file is the **single source of truth** for any AI agent (or human) editing 
 
 8. **Lint gates must pass — run `mise run check`.** All gates are `mise` tasks (defined in the repo-root `mise.toml`), so local == CI == the lefthook pre-commit hook. Shell must pass `shellcheck` (config in `.shellcheckrc`, bash semantics) and `shfmt`; zsh files must pass `zsh -n`; TOML `taplo`; YAML `yamlfmt`; markdown is formatted by `dprint` (unwraps prose, aligns tables) and linted by `markdownlint-cli2`; workflows `actionlint`, whitespace `editorconfig-checker`. `mise run fmt` auto-formats; `mise run lint` is the read-only gate; `mise run
  test` runs the bats suite under `test/`. Bootstrap once with `mise install &&
- mise run setup`. See [ADR-0006](docs/adr/0006-dev-tooling-mise-tasks-lefthook.md).
+ mise run setup`.
 
 9. **stow package layout: a top-level dir mirroring `$HOME`.** A package directory contains the target's home-relative tree. Examples:
    - `zsh/.zshenv` → `~/.zshenv`
@@ -57,7 +57,7 @@ Comment the **why**, not the **what** — a comment earns its place only by addi
 
 ## Presets & modules (the install model)
 
-`install.sh` resolves a **preset** into a set of **modules** through one code path shared by the interactive `gum` TUI and the non-interactive flags ([ADR-0007](docs/adr/0007-presets-and-modules.md)). Composition is `saved selection or preset defaults ∪ --with − --without`, then `depends_on` expansion. GUI is orthogonal (`--gui` / `--no-gui`).
+`install.sh` resolves a **preset** into a set of **modules** through one code path shared by the interactive `gum` TUI and the non-interactive flags. Composition is `saved selection or preset defaults ∪ --with − --without`, then `depends_on` expansion. GUI is orthogonal (`--gui` / `--no-gui`).
 
 - **Presets**: `dev`, `headless`. `headless` defaults to no GUI (skips casks/fonts and the macOS phases).
 - **Modules**: technology-shaped units (`core`, `git`, `js`, `jvm`, `aws`, `gcp`, `docker`, …). Each may map to stow packages + optional `brew/Brewfile.<module>` + optional `mise/<module>.toml` (and later other hooks).
@@ -82,7 +82,6 @@ git/ bat/ direnv/ tmux/ ghostty/ starship/ nvim/ bin/   # more stow packages
 agents/               # stow package → ~/.claude/** and ~/AGENTS.md (templates)
 os/macos/             # macOS orchestration (defaults.sh, stow-post.sh)
 test/                 # bats + submodule helpers (bats-support/assert/file)
-docs/adr/             # architecture decision records (the "why")
 secrets.zsh local.zsh # UNTRACKED (gitignored) — never commit
 ```
 

@@ -4,7 +4,7 @@
 
 Turnkey macOS (Apple Silicon) developer environment. One command takes a fresh Mac — or a fresh user profile — to a fully configured modern shell and toolchain.
 
-Managed with [GNU stow](https://www.gnu.org/software/stow/) (symlink farm) driven by a thin, idempotent `install.sh`. Configs live under their real names so the content stays tool-agnostic; see [`docs/adr/`](docs/adr/) for the decisions behind that (and why not chezmoi/Nix).
+Managed with [GNU stow](https://www.gnu.org/software/stow/) (symlink farm) driven by a thin, idempotent `install.sh`. Configs live under their real names so the content stays tool-agnostic.
 
 ## Quick start
 
@@ -33,7 +33,7 @@ After it finishes, restart your shell: `exec zsh`.
 
 ## Presets & modules
 
-A **preset** is a named default set of **modules** (plus a default GUI flag). A **module** is a technology-shaped unit that may contribute stow packages, a Brewfile fragment, a mise manifest, and later other install hooks. See [ADR-0007](docs/adr/0007-presets-and-modules.md).
+A **preset** is a named default set of **modules** (plus a default GUI flag). A **module** is a technology-shaped unit that may contribute stow packages, a Brewfile fragment, a mise manifest, and later other install hooks.
 
 | Preset     | Default modules | GUI? |
 | ---------- | --------------- | ---- |
@@ -72,7 +72,6 @@ mise/                   base + per-module runtime manifests
 lib/                    install-time helpers (log, stow, modules) — not stowed
 os/macos/               defaults.sh, stow-post.sh (VS Code/Cursor/iTerm2), app config
 scripts/                doctor.sh (health check), uninstall.sh
-docs/adr/               architecture decision records
 test/                   bats-core tests
 AGENTS.md               repo discipline rules (read this before editing)
 
@@ -82,7 +81,7 @@ zsh/ starship/ git/ bat/ direnv/ tmux/ ghostty/ bin/ nvim/ agents/
 
 ## Secrets & machine-local overrides
 
-Two untracked files, both sourced last by `.zshrc` (see [ADR-0005](docs/adr/0005-secrets-and-local-overrides.md)):
+Two untracked files, both sourced last by `.zshrc`:
 
 - `~/.config/zsh/secrets.zsh` — secret values. Supports 1Password (`export TOKEN="$(op read op://vault/item/field)"`) or plaintext.
 - `~/.config/zsh/local.zsh` — non-secret machine overrides (wins last). E.g. `export DOTFILES_SAFE_RM=1` to alias `rm` → trash.
@@ -103,7 +102,7 @@ Conflicting real files found during install are moved to `~/.dotfiles-backup/<ti
 
 ## Development
 
-Tooling is driven by [`mise`](https://mise.jdx.dev) tasks (see [ADR-0006](docs/adr/0006-dev-tooling-mise-tasks-lefthook.md)). The same tasks run locally, in the git hooks, and in CI — no drift.
+Tooling is driven by [`mise`](https://mise.jdx.dev) tasks. The same tasks run locally, in the git hooks, and in CI — no drift.
 
 ```sh
 mise install && mise run setup   # one-time: install pinned tools + git hooks

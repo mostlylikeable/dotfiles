@@ -80,8 +80,8 @@ description = "taplo fmt --check"
 run = "taplo fmt --check"
 
 # ---- markdown ---------------------------------------------------------------
-# Two tools, split by concern (see docs/adr/0006): dprint FORMATS layout (reads
-# dprint.json — unwraps prose, aligns tables), markdownlint-cli2 LINTS semantics
+# Two tools, split by concern: dprint FORMATS layout (reads dprint.json —
+# unwraps prose, aligns tables), markdownlint-cli2 LINTS semantics
 # (reads .markdownlint-cli2.yaml).
 
 [tasks."fmt:md"]
