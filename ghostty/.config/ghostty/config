@@ -4,8 +4,8 @@
 font-family = "JetBrainsMono Nerd Font"
 font-size = 14
 
-# Built-in theme.
-theme = "catppuccin-mocha"
+# Built-in theme (Ghostty 1.2+; was catppuccin-mocha).
+theme = Catppuccin Mocha
 
 # Cursor.
 cursor-style = block
