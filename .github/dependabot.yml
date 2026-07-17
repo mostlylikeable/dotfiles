@@ -1,0 +1,27 @@
+# Keep GitHub Actions and bats test submodules current.
+# mise.toml pins are NOT covered here — Dependabot has no mise ecosystem yet
+# (dependabot-core#12320). Bump those deliberately via `mise upgrade` / PRs.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    cooldown:
+      default-days: 3
+
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    groups:
+      bats-submodules:
+        patterns:
+          - "*"
