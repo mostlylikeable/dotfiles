@@ -2,9 +2,9 @@
 # `mise run lint:md` checks; `mise run fmt:md` (--fix) auto-fixes.
 config:
   default: true
-  MD013: false   # line length — editor-driven (see .editorconfig max_line_length)
-  MD033: false   # inline HTML — used in some docs
-  MD041: false   # first line need not be a top-level heading
+  MD013: false # line length — editor-driven (see .editorconfig max_line_length)
+  MD033: false # inline HTML — used in some docs
+  MD041: false # first line need not be a top-level heading
   # table pipe alignment — check-only (no auto-fix exists) and cosmetic (render is
   # identical), so it would just nag. We don't hand-align tables; leave it off.
   MD060: false

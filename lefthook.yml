@@ -42,6 +42,11 @@ pre-commit:
       glob: "*.md"
       run: mise exec -- markdownlint-cli2 {staged_files}
 
+    - name: yamlfmt
+      glob: "*.{yml,yaml}"
+      run: mise exec -- yamlfmt {staged_files}
+      stage_fixed: true
+
     - name: actionlint
       glob: ".github/workflows/*.{yml,yaml}"
       run: mise exec -- actionlint

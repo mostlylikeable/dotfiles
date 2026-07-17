@@ -1,0 +1,16 @@
+# yamlfmt — YAML formatter. Mirrors .editorconfig (2-space, LF, trim WS, final newline).
+# https://github.com/google/yamlfmt
+line_ending: lf
+gitignore_excludes: true
+# Vendored bats submodules (same exclude set as editorconfig-checker / shfmt).
+exclude:
+  - test/bats
+  - test/test_helper
+
+formatter:
+  type: basic
+  indent: 2
+  # Keep intentional blank lines in workflows; collapse runs of blanks to one.
+  retain_line_breaks_single: true
+  trim_trailing_whitespace: true
+  eof_newline: true

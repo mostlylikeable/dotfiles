@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       # zsh is a system dependency (mise doesn't provide it). Everything else —
-      # shellcheck, shfmt, taplo, actionlint, editorconfig-checker, dprint,
-      # markdownlint-cli2 — is pinned in mise.toml and installed below.
+      # shellcheck, shfmt, taplo, yamlfmt, actionlint, editorconfig-checker,
+      # dprint, markdownlint-cli2 — is pinned in mise.toml and installed below.
       - name: Install zsh
         run: |
           sudo apt-get update
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
       - name: Compose + validate Brewfile fragments
-        run: |
+        run: |-
           # macos-14 images ship aws/tap untrusted; brew warns and ignores it until untapped.
           brew untap aws/tap 2>/dev/null || true
           tmp="$(mktemp)"

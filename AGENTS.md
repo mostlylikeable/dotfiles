@@ -27,9 +27,9 @@ This file is the **single source of truth** for any AI agent (or human) editing 
    git::clone_cd() { ...; }
    ```
 
-8. **Lint gates must pass — run `mise run check`.** All gates are `mise` tasks (defined in the repo-root `mise.toml`), so local == CI == the lefthook pre-commit hook. Shell must pass `shellcheck` (config in `.shellcheckrc`, bash semantics) and `shfmt`; zsh files must pass `zsh -n`; TOML `taplo`; markdown is formatted by `dprint` (unwraps prose, aligns tables) and linted by `markdownlint-cli2`; workflows `actionlint`, whitespace `editorconfig-checker`. `mise run fmt` auto-formats; `mise run lint` is the read-only gate; `mise run
-   test` runs the bats suite under `test/`. Bootstrap once with `mise install &&
-   mise run setup`. See [ADR-0006](docs/adr/0006-dev-tooling-mise-tasks-lefthook.md).
+8. **Lint gates must pass — run `mise run check`.** All gates are `mise` tasks (defined in the repo-root `mise.toml`), so local == CI == the lefthook pre-commit hook. Shell must pass `shellcheck` (config in `.shellcheckrc`, bash semantics) and `shfmt`; zsh files must pass `zsh -n`; TOML `taplo`; YAML `yamlfmt`; markdown is formatted by `dprint` (unwraps prose, aligns tables) and linted by `markdownlint-cli2`; workflows `actionlint`, whitespace `editorconfig-checker`. `mise run fmt` auto-formats; `mise run lint` is the read-only gate; `mise run
+ test` runs the bats suite under `test/`. Bootstrap once with `mise install &&
+ mise run setup`. See [ADR-0006](docs/adr/0006-dev-tooling-mise-tasks-lefthook.md).
 
 9. **stow package layout: a top-level dir mirroring `$HOME`.** A package directory contains the target's home-relative tree. Examples:
    - `zsh/.zshenv` → `~/.zshenv`

@@ -18,6 +18,7 @@ node = "lts"                       # runtime for the npm-backed markdown linter
 shfmt = "3.13.1"                   # shell formatter (reads .editorconfig)
 shellcheck = "0.11.0"              # shell linter (reads .shellcheckrc)
 taplo = "0.10.0"                   # TOML formatter/linter
+yamlfmt = "0.21.0"                 # YAML formatter (reads .yamlfmt)
 "npm:markdownlint-cli2" = "0.23.0" # markdown linter (semantics; dprint owns layout)
 
 [settings]
@@ -95,7 +96,17 @@ run = "dprint check"
 description = "markdownlint-cli2 (semantic checks; dprint owns layout)"
 run = "markdownlint-cli2"
 
-# ---- workflows + editorconfig ----------------------------------------------
+# ---- yaml + workflows + editorconfig ----------------------------------------
+# yamlfmt owns YAML layout (reads .yamlfmt). actionlint is the Actions semantic
+# linter — it does not format. editorconfig-checker stays the cross-language gate.
+
+[tasks."fmt:yaml"]
+description = "yamlfmt (write)"
+run = "yamlfmt ."
+
+[tasks."fmt:yaml:check"]
+description = "yamlfmt -lint (fails if unformatted)"
+run = "yamlfmt -lint ."
 
 [tasks."lint:actions"]
 description = "actionlint on .github/workflows"
@@ -114,8 +125,8 @@ run = "./test/bats/bin/bats test/"
 # ---- aggregates -------------------------------------------------------------
 
 [tasks.fmt]
-description = "auto-format everything (shell, toml, markdown)"
-depends = ["fmt:shell", "fmt:toml", "fmt:md"]
+description = "auto-format everything (shell, toml, markdown, yaml)"
+depends = ["fmt:shell", "fmt:toml", "fmt:md", "fmt:yaml"]
 
 [tasks.lint]
 description = "all read-only checks (what CI runs)"
@@ -128,6 +139,7 @@ depends = [
   "fmt:shell:check",
   "fmt:toml:check",
   "fmt:md:check",
+  "fmt:yaml:check",
 ]
 
 [tasks.check]

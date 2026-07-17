@@ -1,5 +1,7 @@
 # dotfiles
 
+[![CI](https://github.com/mostlylikeable/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/mostlylikeable/dotfiles/actions/workflows/ci.yml) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![Platform](https://img.shields.io/badge/platform-macOS%20Apple%20Silicon-black)](#quick-start)
+
 Turnkey macOS (Apple Silicon) developer environment. One command takes a fresh Mac — or a fresh user profile — to a fully configured modern shell and toolchain.
 
 Managed with [GNU stow](https://www.gnu.org/software/stow/) (symlink farm) driven by a thin, idempotent `install.sh`. Configs live under their real names so the content stays tool-agnostic; see [`docs/adr/`](docs/adr/) for the decisions behind that (and why not chezmoi/Nix).
@@ -106,7 +108,7 @@ Tooling is driven by [`mise`](https://mise.jdx.dev) tasks (see [ADR-0006](docs/a
 ```sh
 mise install && mise run setup   # one-time: install pinned tools + git hooks
 
-mise run fmt      # auto-format shell (shfmt), TOML (taplo), markdown (dprint)
+mise run fmt      # auto-format shell (shfmt), TOML (taplo), markdown (dprint), YAML (yamlfmt)
 mise run lint     # read-only gate: shellcheck, zsh -n, markdownlint, actionlint, editorconfig, …
 mise run test     # bats suite (vendored runner)
 mise run check    # lint + test (what CI enforces)
