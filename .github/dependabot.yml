@@ -1,6 +1,6 @@
 # Keep GitHub Actions and bats test submodules current.
 # mise.toml pins are NOT covered here — Dependabot has no mise ecosystem yet
-# (dependabot-core#12320). Bump those deliberately via `mise upgrade` / PRs.
+# (dependabot-core#12320). See .github/workflows/mise-upgrade.yml for weekly bumps.
 version: 2
 updates:
   - package-ecosystem: github-actions

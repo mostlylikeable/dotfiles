@@ -1,0 +1,48 @@
+# Bump pinned tools in the repo-root mise.toml (Dependabot has no mise ecosystem).
+# Opens a PR when anything changes. Manual runs: Actions → mise upgrade → Run workflow.
+name: mise upgrade
+
+on:
+  schedule:
+    # Monday 09:00 UTC — same cadence as Dependabot's weekly Actions scan.
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: mise-upgrade
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - uses: jdx/mise-action@dad1bfd3df957f44999b559dd69dc1671cb4e9ea # v4.2.1
+        with:
+          install: true
+          cache: true
+
+      # Exact pins (e.g. shellcheck = "0.11.0") need --bump to advance.
+      # --local keeps global ~/.config/mise tools out of this PR.
+      - name: mise upgrade --bump --local
+        run: mise upgrade --bump --local
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          branch: deps/mise-upgrade
+          delete-branch: true
+          title: "deps: bump mise tools"
+          commit-message: "deps: bump mise tools"
+          body: |
+            Automated `mise upgrade --bump --local` against the repo-root `mise.toml`.
+
+            Review the pin diff, then merge (or tweak) as usual. CI does not auto-run on
+            PRs opened by `GITHUB_TOKEN` — push an empty commit or close/reopen to trigger
+            it, or just run `mise run check` locally.
+          labels: dependencies
