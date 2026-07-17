@@ -152,22 +152,39 @@ DRY() { if [[ "$DRY_RUN" == 1 ]]; then log::debug "(dry-run) $*"; else "$@"; fi;
 
 # ---- helpers ---------------------------------------------------------------
 choose_one() {
+  # Print choice on stdout. Return non-zero on cancel/invalid — callers must
+  # check status; exit inside $(...) only kills the subshell.
   local prompt="$1"
   shift
   if command -v gum &>/dev/null; then
     gum choose --header "$prompt" "$@"
   else
-    local i=1 opt
-    {
-      printf '%s\n' "$prompt" >&2
-      for opt in "$@"; do
-        printf '  %d) %s\n' "$i" "$opt" >&2
-        ((i++))
-      done
+    local i=1 opt reply
+    printf '%s\n' "$prompt" >&2
+    for opt in "$@"; do
+      printf '  %d) %s\n' "$i" "$opt" >&2
+      ((i++))
+    done
+    read -r -p "#? " reply || {
+      log::error "no selection"
+      return 2
     }
-    local reply
-    read -r "reply?#? "
+    if [[ ! "$reply" =~ ^[0-9]+$ ]] || ((reply < 1 || reply > $#)); then
+      log::error "invalid selection: ${reply:-<empty>} (expected 1-$#)"
+      return 2
+    fi
     printf '%s\n' "${@:$reply:1}"
+  fi
+}
+
+confirm() {
+  local prompt="$1"
+  if command -v gum &>/dev/null; then
+    gum confirm "$prompt"
+  else
+    local reply
+    read -r -p "$prompt [y/N] " reply || return 1
+    [[ "$reply" == [yY] || "$reply" == [yY][eE][sS] ]]
   fi
 }
 
@@ -267,7 +284,10 @@ resolve_selection() {
 
   # Preset: interactive pick, or flag, or default.
   if [[ -z "$PRESET" && "$NONINTERACTIVE" == 0 && -t 0 && -z "${MODULES_FLAG// /}" && "$have_saved" == 0 ]]; then
-    PRESET="$(choose_one "Select a preset:" "${MODULES_PRESETS[@]}")"
+    PRESET="$(choose_one "Select a preset:" "${MODULES_PRESETS[@]}")" || {
+      log::error "preset selection failed"
+      exit 2
+    }
   fi
   [[ -z "$PRESET" ]] && PRESET="dev"
   if ! modules::is_preset "$PRESET"; then
@@ -315,9 +335,9 @@ resolve_selection() {
     esac
   fi
 
-  if [[ "$NONINTERACTIVE" == 0 && -t 0 ]] && command -v gum &>/dev/null; then
+  if [[ "$NONINTERACTIVE" == 0 && -t 0 ]]; then
     local summary="preset=$PRESET  gui=$GUI  modules=$MODULES"
-    if ! gum confirm "$summary — proceed?"; then
+    if ! confirm "$summary — proceed?"; then
       log::warn "aborted"
       exit 1
     fi
