@@ -11,15 +11,15 @@
 [tools]
 # Pinned so local == CI. Bump deliberately.
 actionlint = "1.7.12"              # GitHub Actions workflow linter
-dprint = "0.55.2"                  # markdown formatter (unwraps prose, aligns tables)
-editorconfig-checker = "3.8.0"     # enforces .editorconfig
-lefthook = "2.1.10"                # git hook manager
+dprint = "0.56.1"                  # markdown formatter (unwraps prose, aligns tables)
+editorconfig-checker = "3.11.2"     # enforces .editorconfig
+lefthook = "2.1.12"                # git hook manager
 node = "lts"                       # runtime for the npm-backed markdown linter
-shfmt = "3.13.1"                   # shell formatter (reads .editorconfig)
+shfmt = "3.14.0"                   # shell formatter (reads .editorconfig)
 shellcheck = "0.11.0"              # shell linter (reads .shellcheckrc)
 taplo = "0.10.0"                   # TOML formatter/linter
 yamlfmt = "0.21.0"                 # YAML formatter (reads .yamlfmt)
-"npm:markdownlint-cli2" = "0.23.0" # markdown linter (semantics; dprint owns layout)
+"npm:markdownlint-cli2" = "0.23.2" # markdown linter (semantics; dprint owns layout)
 
 [settings]
 # Let node read idiomatic version files (.nvmrc / .node-version).
